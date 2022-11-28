@@ -1,0 +1,188 @@
+.channel-out-wrapper {
+  height: 600px;
+  width: 100%;
+  .channel-content-wrapper {
+    display: flex;
+    width: 1248px;
+    max-height: 100%;
+    margin: auto;
+    .channel-content-left-wrapper {
+      display: flex;
+      padding-top: 3%;
+      background-color: #fff;
+
+      .channel-content-left-left {
+        max-width: 100%;
+        width: 200px;
+        .channel-user-ko_name {
+          padding-bottom: 5%;
+          font-size: 18px;
+          font-weight: bold;
+        }
+        .channel-user-eng_name {
+          padding-bottom: 5%;
+          font-size: 14px;
+        }
+        .channel-nickname {
+          padding-bottom: 5%;
+          color: #aaaaaa;
+          font-size: 14px;
+        }
+        .channel-followers {
+          padding-right: 2%;
+          color: #aaaaaa;
+          font-size: 14px;
+        }
+        .channel-followers-count {
+          padding-right: 5%;
+        }
+        .channel-following {
+          padding-right: 2%;
+          color: #aaaaaa;
+          font-size: 14px;
+        }
+
+        .channel-account-info-btn-wrapper {
+          margin-top: 10%;
+          .channel-account-info-me-btn {
+            padding: 4%;
+            border: 1px solid #00d084;
+            border-radius: 3px;
+            font-size: 13px;
+            font-weight: bold;
+            width: 130px;
+            cursor: pointer;
+            text-indent: 20px;
+            background: {
+              image: url('https://cdn-icons-png.flaticon.com/512/5268/5268364.png');
+              size: 15px 14px;
+              repeat: no-repeat;
+              position: 10% 50%;
+              color: #fff;
+            }
+          }
+          .followBtn {
+            position: relative;
+            padding: 4%;
+            border: 1px solid #00d084;
+            width: 330px;
+            border-radius: 3px;
+            font-size: 13px;
+            color: #ffffff;
+            text-align: center;
+            cursor: pointer;
+            background: {
+              image: url('../../assets/image/following.png');
+              size: 15px 14px;
+              repeat: no-repeat;
+              position: 40% 50%;
+              color: #00d084;
+            }
+          }
+          .followingBtn {
+            position: relative;
+            padding: 4%;
+            border: 1px solid #00d084;
+            width: 330px;
+            border-radius: 3px;
+            font-size: 13px;
+            color: #00d084;
+            text-align: center;
+            cursor: pointer;
+            background: {
+              image: url('../../assets/image/check.png');
+              size: 15px 14px;
+              repeat: no-repeat;
+              position: 40% 50%;
+              color: #fff;
+            }
+          }
+        }
+      }
+      .channel-content-left-right {
+        width: 150px;
+        margin-right: 10px;
+        .channel-profile {
+          position: relative;
+          img {
+            width: 88px;
+            height: 88px;
+            border-radius: 60%;
+            margin-left: 40px;
+          }
+        }
+      }
+    }
+    .channel-content-right-wrapper {
+      border-left: 1px solid #ececec;
+      background-color: #fff;
+      width: 814px;
+      height: 100%;
+      padding-top: 3%;
+      .channel-content-inner-right-wrapper {
+        max-width: 100%;
+        padding-left: 10%;
+        width: 814px;
+        .channel-content-right-menu {
+          color: #00d084;
+          font-weight: bold;
+          width: 814px;
+          hr {
+            border: 0;
+            height: 0.25px;
+            background: #ececec;
+          }
+        }
+        // .feed-channel-feed-div {
+        //   margin-top: 157px;
+        //   width: 814px;
+        //   height: 100%;
+        //   min-height: 845px;
+
+        // }
+        .channel-feed-text {
+          color: #aaaaaa;
+          text-align: center;
+          font-size: 14px;
+          min-height: 600px;
+          .channel-feed-upload-btn {
+            color: #555555;
+            background-color: #ffffff;
+            font-size: 13px;
+            border: solid 1px #e4e4e4;
+            border-radius: 100px;
+            height: 35px;
+            width: 90px;
+            margin-top: 10px;
+            text-indent: 15px;
+            cursor: pointer;
+            background: {
+              image: url('../../assets/image/upload-black.png');
+              size: 15px 14px;
+              repeat: no-repeat;
+              position: 20% 50%;
+            }
+          }
+        }
+      }
+      .footerContainer {
+        padding: 20px;
+        width: 57vw;
+        border-top: 1px solid #ececec;
+        .footerAlign {
+          width: 880px;
+          margin: 0 auto;
+          display: flex;
+          justify-content: flex-end;
+          .footerText {
+            & span {
+              color: #777777;
+              font-size: 14px;
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

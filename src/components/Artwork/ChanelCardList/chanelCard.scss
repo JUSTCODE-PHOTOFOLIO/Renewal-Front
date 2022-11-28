@@ -1,0 +1,25 @@
+.chanelcard {
+  width: 258px;
+  border: 1px rgba(128, 128, 128, 0.33) solid;
+  margin: 6px 12px 12px 0;
+  cursor: pointer;
+
+  .cardImg {
+    width: 258px;
+    height: 300px;
+  }
+  .chanelcardTitle {
+    border: 1px rgba(128, 128, 128, 0.33) solid;
+    width: 258px;
+    height: 50px;
+  }
+  .chanelcardValue {
+    border: 1px rgba(128, 128, 128, 0.33) solid;
+    width: 258px;
+    height: 50px;
+  }
+
+  .cardValueSpanMargin {
+    margin: 0 5px;
+  }
+}

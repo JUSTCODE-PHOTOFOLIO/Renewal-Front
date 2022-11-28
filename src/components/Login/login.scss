@@ -1,0 +1,71 @@
+.clickArea {
+  width: 100%;
+  height: 1400%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+.loginBox {
+  z-index: 2;
+  position: fixed;
+  top: -100px;
+  left: 450px;
+  width: 600px;
+  height: 600px;
+  border: 0.8px rgba(0, 0, 0, 0.574) solid;
+  margin: 200px auto;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .titleLogo {
+    font : {
+      family: 'Kanit', sans-serif;
+      size: 40px;
+    }
+    color: #00d084;
+  }
+
+  .loginForm {
+    width: 400px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+
+    .buttonDiv {
+      display: flex;
+    }
+
+    .loginSpan {
+      margin: 3px;
+    }
+
+    .loginInput {
+      margin: 3px;
+      width: 350px;
+      height: 40px;
+      border: none;
+      background: rgba(128, 128, 128, 0.267);
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .loginBtn {
+      margin: 20px 6px;
+      color: white;
+      background-color: rgb(94, 205, 138);
+      width: 170px;
+      height: 40px;
+      border: none;
+      font-size: 15px;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
+}

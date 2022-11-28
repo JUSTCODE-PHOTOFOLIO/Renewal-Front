@@ -1,2 +1,1 @@
-# Renewal-Front
-PhotoFolio renewal project
+# react-project

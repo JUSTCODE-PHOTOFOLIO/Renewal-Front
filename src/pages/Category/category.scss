@@ -1,0 +1,42 @@
+.categoryComponent {
+  margin: 0 auto;
+  width: 1264px;
+  height: 219px;
+  border: 1px solid black;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+
+  .categoryName {
+    font-size: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
+
+.categorySelectDiv {
+  width: 200px;
+  height: 250px;
+  border: 1px solid black;
+  background-color: white;
+  display: flex;
+  position: absolute;
+  top: 220px;
+  left: 630px;
+  z-index: 2;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  .categoryChild {
+    width: 200px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+  }
+}

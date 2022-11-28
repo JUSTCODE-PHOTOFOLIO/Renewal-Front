@@ -1,0 +1,194 @@
+@mixin btn {
+  width: 50px;
+  height: 50px;
+  background: {
+    repeat: no-repeat;
+    size: 30px;
+    position: center center;
+  }
+  z-index: 1;
+  cursor: pointer;
+}
+
+.category-wrap {
+  width: 1248px;
+  margin: 0 auto;
+  margin-top: 50px;
+  & h3 {
+    margin-bottom: 15px;
+    font : {
+      size: 30px;
+      weight: 700;
+    }
+  }
+  .carousel-div {
+    overflow: hidden;
+    position: relative;
+    .category-btn {
+      position: absolute;
+      border: none;
+    }
+    .previous {
+      @include btn;
+      background-image: url('../../assets/image/right-arrow.png');
+      right: 0;
+      top: 85px;
+    }
+    .on {
+      opacity: 0.6;
+    }
+
+    .off {
+      opacity: 0;
+    }
+    & .next {
+      @include btn;
+      background-image: url('../../assets/image/left-arrow.png');
+      top: 85px;
+    }
+
+    .goToRight {
+      transform: translateX(-755px);
+      transition: transform 0.5s;
+    }
+
+    .goToLeft {
+      transform: translateX(0px);
+      transition: transform 0.5s;
+    }
+  }
+  .thumbnail-list {
+    width: 1248px;
+    display: flex;
+    position: relative;
+
+    & ul {
+      display: flex;
+      list-style-type: none;
+      gap: 3px;
+      padding-left: 0;
+      & .item {
+        width: 220px;
+        height: 230px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        & .categoryImg {
+          width: 220px;
+          height: 170px;
+          position: absolute;
+          bottom: 60px;
+          object-fit: cover;
+        }
+        .fashionImg {
+          background : {
+            image: url('https://images.unsplash.com/photo-1664333570948-cb94f2985827?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80');
+            repeat: no-repeat;
+            size: cover;
+          }
+        }
+        .patternImg {
+          background : {
+            image: url('https://images.unsplash.com/photo-1614688563870-731b9af565e6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
+            repeat: no-repeat;
+            size: cover;
+          }
+        }
+        .travelImg {
+          background : {
+            image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1421&q=80');
+            repeat: no-repeat;
+            size: cover;
+          }
+        }
+        .animalImg {
+          background : {
+            image: url('https://images.unsplash.com/photo-1497752531616-c3afd9760a11?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
+            repeat: no-repeat;
+            size: cover;
+          }
+        }
+        .annimationImg {
+          background : {
+            image: url('https://images.unsplash.com/photo-1439436556258-1f7fab1bfd4f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
+            repeat: no-repeat;
+            size: cover;
+          }
+        }
+        .designImg {
+          background : {
+            image: url('https://images.unsplash.com/photo-1534670007418-fbb7f6cf32c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80');
+            repeat: no-repeat;
+            size: cover;
+          }
+        }
+        .calligraphyImg {
+          background : {
+            image: url('https://images.unsplash.com/photo-1452860606245-08befc0ff44b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
+            repeat: no-repeat;
+            size: cover;
+          }
+        }
+        .soundImg {
+          background : {
+            image: url('https://plus.unsplash.com/premium_photo-1664699106369-b25664e7bbf6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
+            repeat: no-repeat;
+            size: cover;
+          }
+        }
+        .helloArtistImg {
+          background : {
+            image: url('https://images.unsplash.com/photo-1517697471339-4aa32003c11a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80');
+            repeat: no-repeat;
+            size: cover;
+          }
+        }
+        & .category {
+          width: 220px;
+          height: 60px;
+          position: absolute;
+          top: 170px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          & .title {
+            display: flex;
+            justify-content: space-between;
+            width: 180px;
+            color: #fff;
+            &:first-child {
+              font-size: 700;
+            }
+          }
+        }
+      }
+      & .fashion {
+        background-color: #a0b3df;
+      }
+      & .pattern {
+        background-color: #aac87d;
+      }
+      & .travel {
+        background-color: #e2b620;
+      }
+      & .design {
+        background-color: #4dd4e1;
+      }
+      & .animal {
+        background-color: #147a63;
+      }
+      & .annimation {
+        background-color: #d4da50;
+      }
+      & .sound {
+        background-color: #efddac;
+      }
+      & .calligraphy {
+        background-color: #e6e6e6;
+      }
+      & .helloArtist {
+        background-color: #84d05a;
+      }
+    }
+  }
+}

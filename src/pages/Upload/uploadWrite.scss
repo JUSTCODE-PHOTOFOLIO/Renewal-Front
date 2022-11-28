@@ -1,0 +1,81 @@
+.uploadWriteForm {
+  width: 896px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 0 auto;
+
+  .uploadWriteTitle {
+    width: 896px;
+    border: none;
+    margin: 40px 0 0 0;
+    font-size: 18px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .divide {
+    width: 896px;
+    border-bottom: 1px solid gray;
+    margin: 5px;
+  }
+
+  .uploadWriteContent {
+    width: 896px;
+    height: 500px;
+    margin: 20px 10px;
+    border: none;
+
+    &:focus {
+      outline: none;
+      border-color: rgb(95, 205, 138);
+      box-shadow: 0 0 5px rgb(95, 205, 138);
+    }
+  }
+
+  .uploadWriteTag {
+    width: 896px;
+    height: 20px;
+    margin: 10px;
+    border: none;
+    font-size: 15px;
+    z-index: 2;
+
+    .uploadWriteTagSpan1 {
+    }
+    .uploadWriteTagSpan2 {
+      color: rgba(128, 128, 128, 0.596);
+    }
+  }
+
+  .alertment {
+    width: 896px;
+    position: relative;
+
+    .alertmentSpan {
+      position: absolute;
+      left: 0;
+      color: red;
+      font-size: 11px;
+    }
+  }
+
+  .uploadBtn {
+    width: 138px;
+    height: 34px;
+    background-color: rgb(95, 205, 138);
+    border-radius: 3px;
+    color: white;
+    margin: 40px 0;
+    z-index: 1;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgb(137, 226, 171);
+    }
+  }
+}

@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@600&display=swap');
+
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin main-logo {
+  margin-right: 20px;
+  font : {
+    family: 'Kanit', sans-serif;
+    size: 25px;
+  }
+  color: #00d084;
+  cursor: pointer;
+}
+$header-width: 1248px;
+$header-height: 75px;
+
+header {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  border-bottom: 1px solid #ececec;
+  @include flex-align-center();
+  justify-content: center;
+  .headerContainer {
+    width: $header-width;
+    height: $header-height;
+    @include flex-align-center();
+    justify-content: space-between;
+  }
+  .headerMenu {
+    @include flex-align-center();
+    & ul {
+      width: 350px;
+      list-style: none;
+      @include flex-align-center();
+      justify-content: space-around;
+      color: #777777;
+      font : {
+        size: 15px;
+        weight: 700;
+      }
+      & li {
+        cursor: pointer;
+      }
+      .on {
+        color: #00d084;
+      }
+    }
+    .titleLogo {
+      @include main-logo;
+    }
+  }
+
+  .headerRight {
+    margin-right: 10px;
+    @include flex-align-center();
+    .searchInput {
+      width: 210px;
+      height: 32px;
+      background : {
+        color: #f3f3f3;
+        image: url('../../assets/image/search.png');
+        repeat: no-repeat;
+        size: 13px 13px;
+        position: 8% 50%;
+      }
+      border: none {
+        radius: 20px;
+      }
+      margin-right: 10px;
+      &:focus {
+        outline: none;
+      }
+      text-indent: 40px;
+    }
+    .headerBtn {
+      width: 70px;
+      height: 35px;
+      background-color: #00d084;
+      border: none {
+        radius: 20px;
+      }
+      font-size: 13px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .uploadBtn {
+      background : {
+        image: url('../../assets/image/upload.png');
+        repeat: no-repeat;
+        size: 13px 13px;
+        position: 20% 50%;
+      }
+      width: 80px;
+      padding-left: 15px;
+    }
+
+    //임시 프로필 이미지
+    .headerProfileImg {
+      width: 35px;
+      height: 35px;
+      margin-left: 10px;
+      cursor: pointer;
+      background : {
+        repeat: no-repeat;
+        size: cover;
+        position: center;
+      }
+      border-radius: 50%;
+    }
+    .mouseHover {
+      position: relative;
+      .headerProfileMenu {
+        position: absolute;
+        width: 130px;
+        background-color: #fff;
+        border: 1px solid #ececec;
+
+        & ul li {
+          padding: 10px;
+          font-size: 14px;
+          cursor: pointer;
+        }
+        & ul li:first-child {
+          border-bottom: 1px solid #ececec;
+        }
+      }
+    }
+    .hide {
+      display: none;
+    }
+  }
+}

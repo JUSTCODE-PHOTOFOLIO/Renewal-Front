@@ -1,0 +1,58 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "category": "패션",
+      "eng_category": "fashion",
+      "category_count": "375,002"
+    },
+    {
+      "id": 2,
+      "category": "패턴&질감",
+      "eng_category": "pattern",
+      "category_count": "179,425"
+    },
+    {
+      "id": 3,
+      "category": "여행",
+      "eng_category": "travel",
+      "category_count": "845,002"
+    },
+    {
+      "id": 4,
+      "category": "동물",
+      "eng_category": "animal",
+      "category_count": "735,104"
+    },
+    {
+      "id": 5,
+      "category": "애니메이션",
+      "eng_category": "animation",
+      "category_count": "136,579"
+    },
+    {
+      "id": 6,
+      "category": "디자인",
+      "eng_category": "design",
+      "category_count": "876,352"
+    },
+    {
+      "id": 7,
+      "category": "조소/공예",
+      "eng_category": "craft",
+      "category_count": "395,132"
+    },
+    {
+      "id": 8,
+      "category": "사운드",
+      "eng_category": "sound",
+      "category_count": "100,001"
+    },
+    {
+      "id": 9,
+      "category": "헬로! 아티스트",
+      "eng_category": "helloartist",
+      "category_count": "415,672"
+    }
+  ]
+}

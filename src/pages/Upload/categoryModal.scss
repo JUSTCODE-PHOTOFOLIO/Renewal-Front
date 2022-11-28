@@ -1,0 +1,22 @@
+.categoryModal {
+  border: solid black 1px;
+  width: 378px;
+  height: 100px;
+  z-index: 3;
+  background-color: white;
+  display: flex;
+  position: absolute;
+
+  .leftRadio {
+    display: flex;
+    flex-direction: column;
+    margin: 0 50px;
+  }
+
+  .rightRadio {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0 50px;
+  }
+}

@@ -1,0 +1,119 @@
+.account-out-wrapper {
+  width: 100%;
+  background-color: rgb(244, 243, 243);
+  padding: 40px 0px;
+  .account-header-wrapper {
+    width: 1248px;
+    margin: auto;
+    text-align: center;
+    background-color: #00d084;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 11px 0px;
+    .account-header {
+    }
+  }
+  .account-info-wrapper {
+    width: 1248px;
+    margin: 30px auto;
+    background-color: #ffffff;
+    border: 1px solid #e7e7e7;
+    .account-info-form-wrapper {
+      width: 630px;
+      margin: 50px auto;
+      .account-info-form {
+        .account-info-not-null {
+          display: inline-block;
+          font-size: 13px;
+          color: #ff3800;
+          width: 7.89px;
+          height: 18px;
+        }
+        .account-info-title {
+          display: inline-block;
+          font-size: 13px;
+          font-weight: bold;
+          width: 178.3px;
+          height: 52px;
+        }
+        .special {
+          padding-left: 7.89px;
+        }
+        .account-info-id {
+          display: inline;
+          font-size: 12px;
+          width: 428px;
+          height: 42px;
+          margin-left: 5px;
+        }
+        input {
+          display: inline;
+          font-size: 12px;
+          width: 430px;
+          height: 40px;
+          border: 1px solid #e7e7e7;
+          padding-left: 10px;
+        }
+        .account-info-img-part-wrapper {
+          display: flex;
+          margin-bottom: 20px;
+          .account-info-img-wrapper {
+            display: flex;
+            margin-left: 9px;
+            img {
+              width: 122px;
+              height: 122px;
+              margin-right: 20px;
+              border-radius: 50%;
+            }
+          }
+        }
+      }
+
+      hr {
+        border: 0;
+        height: 1px;
+        background: #ececec;
+        margin-bottom: 19px;
+      }
+      .account-info-contract {
+        color: #aaaaaa;
+        font-size: 12px;
+        margin-bottom: 30px;
+      }
+      .btn {
+        cursor: pointer;
+      }
+      .account-info-btn-wrapper {
+        width: 630px;
+        text-align: center;
+        .account-info-save-btn {
+          background-color: #00d084;
+          border: none;
+          border-radius: 3px;
+          color: #ffffff;
+          width: 122px;
+          height: 40px;
+          margin-right: 10px;
+        }
+        .account-info-reset-btn {
+          background-color: #ffffff;
+          color: #555555;
+          border: 1px solid #ddd;
+          border-radius: 3px;
+          width: 122px;
+          height: 40px;
+        }
+        .account-info-wdraw-btn {
+          border: none;
+          background-color: #ffffff;
+          font-size: 12px;
+          color: #858585;
+          text-decoration: underline;
+          float: right;
+          margin: 10px 0px 0px -48px;
+        }
+      }
+    }
+  }
+}

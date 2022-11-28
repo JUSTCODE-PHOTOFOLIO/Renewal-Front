@@ -1,0 +1,31 @@
+.tagModal {
+  width: 898px;
+  height: 100px;
+  border: 1px rgba(128, 128, 128, 0.523) solid;
+  background-color: white;
+
+  .tagField {
+    display: flex;
+    flex-wrap: wrap;
+
+    .uploadModalTag {
+      margin: 6px;
+      padding: 6px;
+      border-radius: 10px;
+
+      font-size: 15px;
+      background-color: rgb(244, 244, 244);
+    }
+  }
+
+  .tagModalInput {
+    width: 860px;
+    height: 30px;
+    border: none;
+    margin: 0 0 0 10px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

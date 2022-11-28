@@ -1,0 +1,98 @@
+{
+  "userInfo": [
+    {
+      "user_id": 12,
+      "nickname": "멍멍!",
+      "kor_name": "박똥개",
+      "eng_name": "Ddonggae Park",
+      "email": "hihello@gmail.com",
+      "profile_image": "https://images.unsplash.com/photo-1497752531616-c3afd9760a11?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+    }
+  ],
+  "userFollowingInfo": [
+    {
+      "following_cnt": "0",
+      "following_info": null
+    }
+  ],
+  "userFollowerInfo": [
+    {
+      "follower_cnt": "0",
+      "follower_info": null
+    }
+  ],
+  "usersPosts": [
+    {
+      "id": 4,
+      "user_id": 12,
+      "nickname": "멍멍!",
+      "profile_image": "https://images.unsplash.com/photo-1497752531616-c3afd9760a11?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      "img_url": "http://dummyimage.com/1552x1767.png/5fa2dd/ffffff",
+      "title": "Spermophilus lateralis",
+      "comment_cnt": "1",
+      "sympathy_cnt": "0",
+      "view_count": 56,
+      "created_at": "2022-11-02"
+    },
+    {
+      "id": 5,
+      "user_id": 12,
+      "nickname": "멍멍!",
+      "profile_image": "https://images.unsplash.com/photo-1497752531616-c3afd9760a11?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      "img_url": "http://dummyimage.com/716x780.png/dddddd/000000",
+      "title": "Eubalaena australis",
+      "comment_cnt": "1",
+      "sympathy_cnt": "0",
+      "view_count": 7,
+      "created_at": "2022-11-02"
+    },
+    {
+      "id": 14,
+      "user_id": 12,
+      "nickname": "멍멍!",
+      "profile_image": "https://images.unsplash.com/photo-1497752531616-c3afd9760a11?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      "img_url": "http://dummyimage.com/1759x1654.png/dddddd/000000",
+      "title": "Bassariscus astutus",
+      "comment_cnt": "1",
+      "sympathy_cnt": "0",
+      "view_count": 0,
+      "created_at": "2022-11-02"
+    },
+    {
+      "id": 21,
+      "user_id": 12,
+      "nickname": "멍멍!",
+      "profile_image": "https://images.unsplash.com/photo-1497752531616-c3afd9760a11?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      "img_url": "http://dummyimage.com/752x903.png/dddddd/000000",
+      "title": "Tragelaphus angasi",
+      "comment_cnt": "1",
+      "sympathy_cnt": "0",
+      "view_count": 0,
+      "created_at": "2022-11-02"
+    },
+    {
+      "id": 24,
+      "user_id": 12,
+      "nickname": "멍멍!",
+      "profile_image": "https://images.unsplash.com/photo-1497752531616-c3afd9760a11?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      "img_url": "http://dummyimage.com/2121x1068.png/dddddd/000000",
+      "title": "Isoodon obesulus",
+      "comment_cnt": "0",
+      "sympathy_cnt": "0",
+      "view_count": 0,
+      "created_at": "2022-11-02"
+    },
+    {
+      "id": 30,
+      "user_id": 12,
+      "nickname": "멍멍!",
+      "profile_image": "https://images.unsplash.com/photo-1497752531616-c3afd9760a11?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      "img_url": "http://dummyimage.com/1915x1437.png/5fa2dd/ffffff",
+      "title": "Corvus albicollis",
+      "comment_cnt": "0",
+      "sympathy_cnt": "0",
+      "view_count": 0,
+      "created_at": "2022-11-02"
+    }
+  ]
+}
