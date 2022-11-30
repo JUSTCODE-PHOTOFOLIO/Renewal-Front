@@ -1,40 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './CardDetailCarousel.scss';
-import Login from '../Login/Login';
-import Join from '../Join/Join';
+
+import Follow from '../Follow/Follow';
 
 const CardDetailCarousel = ({ URI }) => {
   const [info, setInfo] = useState({});
   const [works, setWorks] = useState([]);
-  const [isFollow, setIsFollow] = useState(0);
   const [writerInfo, setWriterInfo] = useState([]);
-
-  //login창 로직 추가 코드
-  const [openLoginpage, setOpenLoginPage] = useState(false);
-  const [openJoinPage, setJoinPage] = useState(false);
-  function closeLoginpage() {
-    setOpenLoginPage(false);
-  }
-  function clickLoginBtn(event) {
-    alert('로그인한 다음 이용해 주세요.');
-    setOpenLoginPage(true);
-  }
-
-  //로그인 여부 확인
-  const [isLogin, setIsLogin] = useState(false);
-
-  //localStorage에 token 유무 체크
-  const token = localStorage.getItem('token');
-  useEffect(() => {
-    if (token) {
-      setIsLogin(true);
-      return;
-    } else if (!token) {
-      setIsLogin(false);
-      return;
-    }
-  }, [token]);
 
   //페이지 첫 렌더링 시 데이터 불러오기
   const params = useParams();
@@ -139,25 +112,6 @@ const CardDetailCarousel = ({ URI }) => {
       }
       return;
     }
-
-    // if (works.length % 5 !== 0) {
-    //   let maxPage = works.length / 5; //4
-    //   if (carouselIndex === maxPage) {
-    //     return;
-    //   } else {
-    //     setCarouselIndex(carouselIndex + 1);
-    //     setListLocation(listLocation - 910);
-    //   }
-    //   return;
-    // } else if (works.length % 5 > 1) {
-    //   let maxPage = Math.floor(works.length / 5);
-    //   if (carouselIndex === maxPage) {
-    //     return;
-    //   }
-    //   setCarouselIndex(Math.floor(works.length / 5));
-    //   setListLocation(listLocation - 910);
-    //   return;
-    // }
   };
 
   //클릭 시 1감소 (0보다 작아지지 않게 처리)
@@ -182,16 +136,6 @@ const CardDetailCarousel = ({ URI }) => {
     <>
       <div className="wideBorder" />
       <div className="cardDetailInfoCarousel">
-        {/* login창 로직 추가 코드 */}
-        {openLoginpage && (
-          <Login
-            closeLoginpage={closeLoginpage}
-            setJoinPage={setJoinPage}
-            setOpenLoginPage={setOpenLoginPage}
-          />
-        )}
-        {openJoinPage && <Join setJoinPage={setJoinPage} />}
-        {/* login창 로직 추가 코드 종료*/}
         <div className="writerInfo">
           <div className="writerInfoLeft">
             <div className="writerInfoImg">
@@ -211,34 +155,7 @@ const CardDetailCarousel = ({ URI }) => {
               </div>
             </div>
           </div>
-          <div className="followBtns" onClick={handleToggle}>
-            {/* 
-            로그인 한 상태이면서 팔로우한 상태에서만 팔로잉 버튼 
-            1 : 팔로잉 되어있는 상태 (하얀 버튼)
-            0 : 팔로잉 되어있지 않은 상태 (초록 버튼)
-            */}
-            {isLogin ? (
-              isFollow == 1 ? (
-                <div
-                  className={isClick ? 'followBtn' : 'followingBtn'}
-                  onClick={sendResult}
-                >
-                  {isClick ? '팔로우' : '팔로잉'}
-                </div>
-              ) : (
-                <div
-                  className={isClick ? 'followingBtn' : 'followBtn'}
-                  onClick={sendResult}
-                >
-                  {isClick ? '팔로잉' : '팔로우'}
-                </div>
-              )
-            ) : (
-              <div className="followBtn" onClick={clickLoginBtn}>
-                팔로우
-              </div>
-            )}
-          </div>
+          <Follow writerInfo={writerInfo} />
         </div>
         {/* Carousel */}
         {works === null ? (
