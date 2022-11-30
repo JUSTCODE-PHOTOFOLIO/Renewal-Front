@@ -100,19 +100,15 @@
       .detail-reaction-icon-second-wrapper {
         flex-direction: column;
         width: 100px;
-        .detail-reaction-icon-title-wrapper {
-          .detail-icon-title {
-            font-size: 12px;
-            text-align: center;
-            color: #aaaaaa;
-            width: 100%;
-          }
+        .detail-icon-title {
+          font-size: 12px;
+          text-align: center;
+          color: #aaaaaa;
+          width: 100%;
         }
-        .detail-reaction-icon-count-wrapper {
-          .detail-icon-count {
-            font-size: 16px;
-            text-align: center;
-          }
+        .detail-icon-count {
+          font-size: 16px;
+          text-align: center;
         }
       }
     }
@@ -171,65 +167,63 @@
       text-align: left;
       top: -20%;
     }
-    .detail-reply-input-out-wrapper {
-      .detail-reply-input-wrapper {
-        width: 896px;
-        height: 176px;
-        background-color: #fff;
-        border: 1px solid #b3b3b3;
-        margin: 0 auto;
-        border-radius: 3px;
-        .detail-reply-input-inner-wrapper {
-          padding: 10px;
-          .detail-reply-title {
-            width: 870px;
-            height: 23px;
-            font-size: 13px;
-            color: #000000;
-            font-weight: bold;
-          }
-          .detail-reply-text-area-wrapper {
+    .detail-reply-input-wrapper {
+      width: 896px;
+      height: 176px;
+      background-color: #fff;
+      border: 1px solid #b3b3b3;
+      margin: 0 auto;
+      border-radius: 3px;
+      .detail-reply-input-inner-wrapper {
+        padding: 10px;
+        .detail-reply-title {
+          width: 870px;
+          height: 23px;
+          font-size: 13px;
+          color: #000000;
+          font-weight: bold;
+        }
+        .detail-reply-text-area-wrapper {
+          border: none;
+          width: 870px;
+          height: 49px;
+          textarea {
             border: none;
-            width: 870px;
-            height: 49px;
-            textarea {
-              border: none;
-              width: 100%;
-              height: 100%;
-              resize: none;
-              overflow: hidden;
-            }
-            textarea:focus {
-              outline: none;
-            }
-            textarea::placeholder {
-              font-size: 12px;
-              color: #cccccc;
-            }
+            width: 100%;
+            height: 100%;
+            resize: none;
+            overflow: hidden;
           }
-          .detail-reply-text-limit {
-            text-align: right;
-            height: 22px;
-            color: #999999;
-            font-size: 13px;
-            margin-top: 15px;
+          textarea:focus {
+            outline: none;
+          }
+          textarea::placeholder {
+            font-size: 12px;
+            color: #cccccc;
           }
         }
-        .detail-reply-apload-btn {
-          border-top: 1px solid #ededed;
+        .detail-reply-text-limit {
           text-align: right;
-          padding-bottom: 0;
-          button {
-            width: 68px;
-            height: 45px;
-            background-color: #00d084;
-            font-size: 13px;
-            font-weight: bold;
-            line-height: 45px;
-            color: #fff;
-            border-radius: 0px 0px 3px 0px;
-            cursor: pointer;
-          }
+          height: 22px;
+          color: #999999;
+          font-size: 13px;
+          margin-top: 15px;
+        }
+      }
+      .detail-reply-apload-btn {
+        border-top: 1px solid #ededed;
+        text-align: right;
+        padding-bottom: 0;
+        button {
+          width: 68px;
+          height: 45px;
+          background-color: #00d084;
+          font-size: 13px;
+          font-weight: bold;
+          line-height: 45px;
+          color: #fff;
+          border-radius: 0px 0px 3px 0px;
+          cursor: pointer;
         }
       }
     }

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import CardList from '../Artwork/CardList';
 import ChanelCardList from '../Artwork/ChanelCardList/ChanelCardList';
 import Join from '../Join/Join';
 import Login from '../Login/Login';
@@ -19,12 +18,8 @@ const Channel = () => {
   const [postArray, setPostArray] = useState([]); //카드정보 데이터
   const [followingInfo, setFollowingInfo] = useState([]); //팔로잉정보 데이터
   const [followerInfo, setFollowerInfo] = useState([]); //팔로워정보 데이터
-
-  //클릭 여부 확인
-  const [isClick, setIsClick] = useState(isFollow);
-  // const { user_id } = useParams();
-  // const params = useParams();
-
+  const id = localStorage.getItem('id');
+  const [isClick, setIsClick] = useState(isFollow); //클릭 여부 확인
   let param = useParams();
   let params = param.user_id;
 
@@ -42,6 +37,7 @@ const Channel = () => {
         setFollowingInfo(result.userFollowingInfo[0]);
         setFollowerInfo(result.userFollowerInfo[0]);
       });
+
     //팔로우 버튼
     fetch('http://43.201.0.95:8000/works/feed/' + params + '/followcheck', {
       headers: {
@@ -52,12 +48,8 @@ const Channel = () => {
       .then(res => res.json())
       .then(json => {
         setIsFollow(json.checkFollow[0].success);
-        console.log('isFollow : ', isFollow);
       });
   }, []);
-
-  console.log(followingInfo);
-  console.log(followerInfo);
 
   //로그인 모달창 닫기
   function closeLoginpage() {
@@ -133,12 +125,10 @@ const Channel = () => {
           <div className="channel-content-left-wrapper">
             <div className="channel-content-left-left">
               <div className="channel-user-ko_name">{userInfo.kor_name}</div>
-              {userInfo.eng_name ? (
+              {userInfo.eng_name && (
                 <div className="channel-user-eng_name">
                   ({userInfo.eng_name})
                 </div>
-              ) : (
-                ''
               )}
               <div className="channel-nickname">{userInfo.nickname}</div>
               <span className="channel-followers">팔로워</span>
@@ -150,7 +140,7 @@ const Channel = () => {
                 {followingInfo.following_cnt}
               </span>
               <div className="channel-account-info-btn-wrapper">
-                {localStorage.getItem('id') == userInfo.user_id ? (
+                {id == userInfo.user_id ? (
                   <button className="channel-account-info-me-btn">
                     <Link to="/accountInfo" style={{ color: '#00d084' }}>
                       계정정보 수정
@@ -213,7 +203,7 @@ const Channel = () => {
                   <ChanelCardList />
                 </div>
               ) : // 작품 데이터가 없다면, 현재 로그인 한 사람과 같은지 다른 사람인지 체크
-              localStorage.getItem('id') == userInfo.user_id ? (
+              id == userInfo.user_id ? (
                 <div className="feed-channel-feed-div channel-feed-text">
                   등록된 작품이 없습니다. <br />
                   <button className="channel-feed-upload-btn">

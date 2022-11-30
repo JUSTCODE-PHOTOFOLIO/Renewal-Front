@@ -1,6 +1,6 @@
 import './Reply.scss';
 
-const Reply = ({ user_id, kor_name, comment, created_at }) => {
+const Reply = ({ kor_name, comment, created_at }) => {
   return (
     <>
       <div className="detail-reply-card">
