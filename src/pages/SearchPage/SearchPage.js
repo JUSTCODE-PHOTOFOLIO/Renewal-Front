@@ -13,6 +13,7 @@ const SearchPage = () => {
   let location = useLocation();
   let params = new URLSearchParams(location.search); //?query=구름
   let query = params.get('query');
+  const URI = process.env.REACT_APP_BASE_URL;
 
   //검색 페이지 데이터 불러오기
   useEffect(() => {
@@ -27,9 +28,9 @@ const SearchPage = () => {
 
   return (
     <Fragment>
-      <Header pathname={location.pathname} />
-      <SearchBar resultCount={resultCount} />
-      <SearchFilter />
+      <Header pathname={location.pathname} URI={URI} />
+      <SearchBar resultCount={resultCount} URI={URI} />
+      <SearchFilter URI={URI} />
       {searchResult.length === 0 ? (
         <Fragment>
           <div className="noResult">
@@ -37,7 +38,7 @@ const SearchPage = () => {
           </div>
         </Fragment>
       ) : (
-        <CardList />
+        <CardList URI={URI} />
       )}
 
       <Footer />

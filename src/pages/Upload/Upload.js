@@ -15,6 +15,7 @@ function App() {
   const [public_status, setPublic_status] = useState(null);
 
   const [cardData, setCardData] = useState();
+  const URI = process.env.REACT_APP_BASE_URL;
 
   function uploadImageClick(event) {
     event.preventDefault();
@@ -78,7 +79,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header URI={URI} />
       {uploadCheck && <UploadMain onImgChange={onImgChange} />}
       {!uploadCheck && (
         <UploadWrite

@@ -3,7 +3,7 @@ import ArtworkFilter from './ArtworkFilter';
 import CardList from './CardList';
 import './artwork.scss';
 
-function Artwork() {
+function Artwork({ URI }) {
   const [filter, setFilter] = useState(1);
   return (
     <>
@@ -47,7 +47,7 @@ function Artwork() {
           />
         </div>
       </div>
-      <CardList filter={filter} />
+      <CardList filter={filter} URI={URI} />
     </>
   );
 }
