@@ -3,10 +3,11 @@ import Header from '../../components/Header/Header';
 import Channel from '../../components/Channel/Channel';
 
 const ChannelPage = () => {
+  const URI = process.env.REACT_APP_BASE_URL;
   return (
     <Fragment>
-      <Header />
-      <Channel />
+      <Header URI={URI} />
+      <Channel URI={URI} />
     </Fragment>
   );
 };

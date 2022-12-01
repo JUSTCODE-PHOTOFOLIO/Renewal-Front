@@ -3,14 +3,15 @@ import { useLocation, useParams } from 'react-router-dom';
 import Card from './Card';
 import './cardList.scss';
 
-function CardList({ filter }) {
+function CardList({ filter, URI }) {
   const [data, setData] = useState([]);
   let param = useParams();
   let params = param.user_id;
   let location = useLocation();
+  console.log(URI + '8000/works');
   useEffect(() => {
     if (location.pathname === '/works') {
-      fetch('http://43.201.0.95:8000/works')
+      fetch(URI + '8000/works')
         .then(res => res.json())
         .then(data => {
           setData(data.worksFeedList);

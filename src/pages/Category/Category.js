@@ -11,6 +11,7 @@ function App() {
   const [categorySelect, setCategorySelect] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
+  const URI = process.env.REACT_APP_BASE_URL;
 
   function moveCategory(event) {
     if (event.target.innerText === '패션')
@@ -93,7 +94,7 @@ function App() {
           </div>
         </div>
       )}
-      <CardList />
+      <CardList URI={URI} />
       <Footer />
     </div>
   );

@@ -6,12 +6,13 @@ import CardDetailCarousel from '../../components/CardDetailCarousel/CardDetailCa
 import CardList from '../../components/Artwork/CardList';
 
 const CardDetailPage = () => {
+  const URI = process.env.REACT_APP_BASE_URL;
   return (
     <Fragment>
       <Header />
-      <CardDetailContent />
-      <CardDetailCarousel />
-      <CardList />
+      <CardDetailContent URI={URI} />
+      <CardDetailCarousel URI={URI} />
+      <CardList URI={URI} />
       <Footer />
     </Fragment>
   );
