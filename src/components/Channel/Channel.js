@@ -5,7 +5,7 @@ import Join from '../Join/Join';
 import Login from '../Login/Login';
 import './Channel.scss';
 
-const Channel = () => {
+const Channel = ({ URI }) => {
   const [isFollow, setIsFollow] = useState(0); //팔로잉 상태관리
 
   //login창 로직 추가 코드
@@ -25,7 +25,7 @@ const Channel = () => {
 
   //데이터 fetch
   useEffect(() => {
-    fetch('http://43.201.0.95:8000/channel/' + params, {
+    fetch('http://' + URI + ':8000/channel/' + params, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -39,16 +39,16 @@ const Channel = () => {
       });
 
     //팔로우 버튼
-    fetch('http://43.201.0.95:8000/works/feed/' + params + '/followcheck', {
-      headers: {
-        'Content-Type': 'application/json',
-        token: localStorage.getItem('token'),
-      },
-    })
-      .then(res => res.json())
-      .then(json => {
-        setIsFollow(json.checkFollow[0].success);
-      });
+    // fetch('http://' + URI + ':8000/works/feed/' + params + '/followcheck', {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     token: localStorage.getItem('token'),
+    //   },
+    // })
+    //   .then(res => res.json())
+    //   .then(json => {
+    //     setIsFollow(json.checkFollow[0].success);
+    //   });
   }, []);
 
   //로그인 모달창 닫기
@@ -81,7 +81,7 @@ const Channel = () => {
   const sendResult = e => {
     if (e.target.className === 'followBtn') {
       //POST 작가id, 토큰
-      fetch('http://43.201.0.95:8000/follow', {
+      fetch('http://' + URI + ':8000/follow', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ const Channel = () => {
         .then(json => {});
     } else if (e.target.className === 'followingBtn') {
       //DELETE 작가id, 토큰
-      fetch('http://43.201.0.95:8000/follow', {
+      fetch('http://' + URI + ':8000/follow', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -200,7 +200,7 @@ const Channel = () => {
               {postArray.length !== 0 ? (
                 // 작품 리스트를 보여줌
                 <div className="feed-channel-feed-div">
-                  <ChanelCardList />
+                  <ChanelCardList URI={URI} />
                 </div>
               ) : // 작품 데이터가 없다면, 현재 로그인 한 사람과 같은지 다른 사람인지 체크
               id == userInfo.user_id ? (

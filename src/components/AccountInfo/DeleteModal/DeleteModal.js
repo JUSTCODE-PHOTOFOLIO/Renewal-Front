@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import './DeleteModal.scss';
 
-const DeleteModal = ({ setModalOpen }) => {
+const DeleteModal = ({ setModalOpen, URI }) => {
   const navigate = useNavigate();
   //모달 내용 배열
   const modalContentArray = [
@@ -39,11 +39,11 @@ const DeleteModal = ({ setModalOpen }) => {
   //데이터 삭제
   const deleteAccount = e => {
     e.preventDefault();
-    fetch('http://43.201.0.95:8000/user/accountInfo', {
+    fetch('http://' + URI + ':8000/user/accountInfo', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        token: localStorage.getItem('token'),
+        Authorization: localStorage.getItem('token'),
       },
     })
       //모든 localstorage 데이터 삭제

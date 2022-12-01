@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './AccountInfo.scss';
 import DeleteModal from './DeleteModal/DeleteModal';
 
-const AccountInfo = () => {
+const AccountInfo = ({ URI }) => {
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const [accountInfo, setAccountInfo] = useState({
@@ -26,11 +26,11 @@ const AccountInfo = () => {
 
   //계정정보 fetch
   useEffect(() => {
-    fetch('http://43.201.0.95:8000/user/accountInfo', {
+    fetch('http://' + URI + ':8000/user/accountInfo', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        token: localStorage.getItem('token'),
+        Authorization: localStorage.getItem('token'),
       },
     })
       .then(res => res.json())
@@ -46,11 +46,11 @@ const AccountInfo = () => {
   //수정된 계정정보 서버로 저장
   const saveAccountInfo = e => {
     e.preventDefault();
-    fetch('http://43.201.0.95:8000/user/accountInfo', {
+    fetch('http://' + URI + ':8000/user/accountInfo', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        token: localStorage.getItem('token'),
+        Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify(accountInfo),
     }).then(res => res.json());
@@ -188,7 +188,9 @@ const AccountInfo = () => {
                 >
                   채널삭제
                 </button>
-                {modalOpen && <DeleteModal setModalOpen={setModalOpen} />}
+                {modalOpen && (
+                  <DeleteModal setModalOpen={setModalOpen} URI={URI} />
+                )}
               </div>
             </div>
           </form>

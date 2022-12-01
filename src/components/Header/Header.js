@@ -8,6 +8,7 @@ function Header({ pathname }) {
   const id = localStorage.getItem('id');
   const location = useLocation();
   let nowPage = location.pathname;
+  const URI = process.env.REACT_APP_BASE_URL;
 
   //로그인 여부 체크
   const [isLogin, setIsLogin] = useState(false);
@@ -78,6 +79,7 @@ function Header({ pathname }) {
             closeLoginpage={closeLoginpage}
             setJoinPage={setJoinPage}
             setOpenLoginPage={setOpenLoginPage}
+            URI={URI}
           />
         </div>
       )}
@@ -85,7 +87,7 @@ function Header({ pathname }) {
         <div
           style={{ boxShadow: 'rgba(0, 0, 0, 0.5) 0 0 0 9999px', zIndex: '3' }}
         >
-          <Join setJoinPage={setJoinPage} />
+          <Join setJoinPage={setJoinPage} URI={URI} />
         </div>
       )}
       {/* login창 로직 추가 코드 종료*/}
@@ -181,7 +183,7 @@ function Header({ pathname }) {
                     <li
                       onClick={() => {
                         localStorage.clear();
-                        window.location.href = 'http://43.201.0.95:3000/works';
+                        window.location.href = 'http://' + URI + ':3000/works';
                       }}
                     >
                       로그아웃
