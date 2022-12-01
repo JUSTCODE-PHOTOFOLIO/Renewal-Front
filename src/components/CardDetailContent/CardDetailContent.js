@@ -66,6 +66,17 @@ const CardDetailContents = () => {
     setOpenLoginPage(true);
   };
 
+  const [menuBtn, setMenuBtn] = useState(false); //메뉴버튼 클릭 상태
+
+  //메뉴버튼 클릭시 버튼의 상태 변경
+  const menuClick = () => {
+    if (menuBtn == false) {
+      setMenuBtn(true);
+    } else {
+      setMenuBtn(false);
+    }
+  };
+
   //TODO:
   // let [click, setClick] = useState(likeBtn); //좋아요 버튼 클릭 여부
   // const [likeCnt, setLikeCnt] = useState(0); //좋아요 갯수
@@ -120,6 +131,17 @@ const CardDetailContents = () => {
         <span className="detail-inquiry-count">
           조회수{cardDetailContents.view_count}
         </span>
+        <span className="menuIcon" onClick={menuClick}></span>
+        {menuBtn && (
+          <div className="menuSelectWrapper">
+            <div className="selectModify">
+              수정하기 <span className="selectPen"></span>
+            </div>
+            <div className="selectDelete">
+              삭제하기 <div className="selectBin"></div>
+            </div>
+          </div>
+        )}
       </div>
       <div className="detail-content-wrapper">
         <div className="detail-content-pictures">
