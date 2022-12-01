@@ -6,7 +6,7 @@ import Login from '../Login/Login';
 import Join from '../Join/Join';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const CardDetailContents = () => {
+const CardDetailContents = ({ URI }) => {
   const [cardDetailContents, setcardDetailContents] = useState([]);
   const [tags, setTags] = useState([]); //태그
   const [feedImg, setFeedImg] = useState([]);
@@ -14,14 +14,15 @@ const CardDetailContents = () => {
   //TODO: let [likeBtn, setlikeBtn] = useState(false); //좋아요 버튼 상태
   const { id } = useParams();
   const token = localStorage.getItem('token');
+  const idCheck = localStorage.getItem('id');
 
   //카드 상세페이지 정보 fetch
   useEffect(() => {
-    fetch('http://43.201.0.95:8000/works/feed/' + id, {
+    fetch('http://' + URI + ':8000/works/feed/' + id, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        token: localStorage.getItem('token'),
+        Authorization: localStorage.getItem('token'),
       },
     })
       .then(res => res.json())
@@ -32,6 +33,7 @@ const CardDetailContents = () => {
         setReplyArray(res.feedCommentInfo);
         setFeedImg(res.feedImgArr[0].fileInfo[0]);
         //TODO: setlikeBtn(res.)
+        console.log(res);
       });
   }, [id]);
 
@@ -40,11 +42,11 @@ const CardDetailContents = () => {
 
   //새로운 댓글 저장 fetch
   const saveReply = () => {
-    fetch('http://43.201.0.95:8000/comments', {
+    fetch('http://' + URI + ':8000/comments', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        token: localStorage.getItem('token'),
+        Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({ id: id, comment: reply.current.value }),
     })
@@ -66,6 +68,17 @@ const CardDetailContents = () => {
     setOpenLoginPage(true);
   };
 
+  const [menuBtn, setMenuBtn] = useState(false); //메뉴버튼 클릭 상태
+
+  //메뉴버튼 클릭시 버튼의 상태 변경
+  const menuClick = () => {
+    if (menuBtn == false) {
+      setMenuBtn(true);
+    } else {
+      setMenuBtn(false);
+    }
+  };
+
   //TODO:
   // let [click, setClick] = useState(likeBtn); //좋아요 버튼 클릭 여부
   // const [likeCnt, setLikeCnt] = useState(0); //좋아요 갯수
@@ -81,7 +94,7 @@ const CardDetailContents = () => {
   //     method: 'POST',
   //     headers: {
   //       'Content-Type': 'application/json',
-  //       token: localStorage.getItem('token'),
+  //       Authorization: localStorage.getItem('token'),
   //     },
   //     body: {
   //       posting_id: id,
@@ -120,6 +133,18 @@ const CardDetailContents = () => {
         <span className="detail-inquiry-count">
           조회수{cardDetailContents.view_count}
         </span>
+        <span className="menuIcon" onClick={menuClick}></span>
+        {/* {idCheck == user_id && ()} */}
+        {menuBtn && (
+          <div className="menuSelectWrapper">
+            <div className="selectModify">
+              수정하기 <span className="selectPen"></span>
+            </div>
+            <div className="selectDelete">
+              삭제하기 <div className="selectBin"></div>
+            </div>
+          </div>
+        )}
       </div>
       <div className="detail-content-wrapper">
         <div className="detail-content-pictures">

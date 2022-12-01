@@ -4,7 +4,7 @@ import './CardDetailCarousel.scss';
 import Login from '../Login/Login';
 import Join from '../Join/Join';
 
-const CardDetailCarousel = () => {
+const CardDetailCarousel = ({ URI }) => {
   const [info, setInfo] = useState({});
   const [works, setWorks] = useState([]);
   const [isFollow, setIsFollow] = useState(0);
@@ -40,10 +40,10 @@ const CardDetailCarousel = () => {
   const params = useParams();
   useEffect(() => {
     //팔로우 기능 제외한 데이터 가져오기
-    fetch('http://localhost:8000/works/feed/' + params.id, {
+    fetch('http://' + URI + ':8000/works/feed/' + params.id, {
       headers: {
         'Content-Type': 'application/json',
-        token: localStorage.getItem('token'),
+        Authorization: localStorage.getItem('token'),
       },
     })
       .then(res => res.json())
@@ -54,10 +54,10 @@ const CardDetailCarousel = () => {
       });
 
     //팔로우 버튼 데이터 가져오기
-    fetch('http://43.201.0.95:8000/works/feed/' + params.id + '/followcheck', {
+    fetch('http://' + URI + ':8000/works/feed/' + params.id + '/followcheck', {
       headers: {
         'Content-Type': 'application/json',
-        token: localStorage.getItem('token'),
+        Authorization: localStorage.getItem('token'),
       },
     })
       .then(res => res.json())
@@ -76,11 +76,11 @@ const CardDetailCarousel = () => {
   const sendResult = e => {
     if (e.target.className === 'followBtn') {
       //POST 작가id, 토큰
-      fetch('http://43.201.0.95:8000/follow', {
+      fetch('http://' + URI + ':8000/follow', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          token: localStorage.getItem('token'),
+          Authorization: localStorage.getItem('token'),
         },
         body: JSON.stringify({
           following_id: writerInfo.id,
@@ -90,11 +90,11 @@ const CardDetailCarousel = () => {
         .then(json => {});
     } else if (e.target.className === 'followingBtn') {
       //DELETE 작가id, 토큰
-      fetch('http://43.201.0.95:8000/follow', {
+      fetch('http://' + URI + ':8000/follow', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          token: localStorage.getItem('token'),
+          Authorization: localStorage.getItem('token'),
         },
         body: JSON.stringify({
           following_id: writerInfo.id,

@@ -33,12 +33,70 @@
       padding: 0px 10px;
       color: #a1a1a1;
       font-size: 14px;
+      margin-right: 625px;
+    }
+    .menuIcon {
+      display: inline-block;
+      background: url('./../../assets/image/menu.png');
+      background-repeat: no-repeat;
+      background-size: 23px;
+      border: none;
+      width: 23px;
+      height: 23px;
+      cursor: pointer;
+    }
+    .menuSelectWrapper {
+      float: left;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      width: 152px;
+      margin-left: 745px;
+      position: relative;
+      // z-index: 101;
+      .selectModify {
+        height: 41px;
+        padding: 10px 10px 10px 13px;
+        font-size: 15px;
+        border-bottom: 1px solid rgb(241, 241, 241);
+        // z-index: 100;
+        cursor: pointer;
+        .selectPen {
+          display: inline-block;
+          background: url('./../../assets/image/pen.png');
+          background-repeat: no-repeat;
+          background-size: 15px;
+          border: none;
+          width: 15px;
+          height: 15px;
+          margin-left: 45px;
+          // z-index: 100;
+        }
+      }
+      .selectDelete {
+        height: 41px;
+        padding: 10px 10px 10px 13px;
+        font-size: 15px;
+        cursor: pointer;
+        // z-index: 100;
+        .selectBin {
+          display: inline-block;
+          background: url('./../../assets/image/bin.png');
+          background-repeat: no-repeat;
+          background-size: 15px;
+          border: none;
+          width: 15px;
+          height: 15px;
+          margin-left: 45px;
+          // z-index: 100;
+        }
+      }
     }
   }
 
   .detail-content-wrapper {
     width: 896px;
     margin: auto;
+    // z-index: 200;
     .detail-content-pictures {
       width: 100%;
       img {

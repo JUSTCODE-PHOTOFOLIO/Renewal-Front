@@ -61,10 +61,10 @@ function App() {
   }
 
   useEffect(() => {
-    fetch('http://43.201.0.95:8000/upload/form', {
+    fetch('http://' + URI + ':8000/upload/form', {
       method: 'POST',
       headers: {
-        token: localStorage.getItem('token'),
+        Authorization: localStorage.getItem('token'),
       },
       body: cardData,
     })
@@ -72,7 +72,7 @@ function App() {
       .then(res => {
         console.log(res);
         if (res.message === '업로드 성공') {
-          window.location.href = 'http://43.201.0.95:3000/feeds';
+          window.location.href = 'http://' + URI + ':3000/feeds';
         }
       });
   }, [cardData]);

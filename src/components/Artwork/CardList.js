@@ -8,19 +8,19 @@ function CardList({ filter, URI }) {
   let param = useParams();
   let params = param.user_id;
   let location = useLocation();
-  console.log(URI + '8000/works');
+  console.log('http://' + URI + ':8000/works');
   useEffect(() => {
     if (location.pathname === '/works') {
-      fetch(URI + '8000/works')
+      fetch('http://' + URI + ':8000/works')
         .then(res => res.json())
         .then(data => {
           setData(data.worksFeedList);
         });
     } else if (location.pathname === '/feeds') {
-      fetch('http://43.201.0.95:8000/feeds/list', {
+      fetch('http://' + URI + ':8000/feeds/list', {
         headers: {
           'Content-Type': 'application/json',
-          token: localStorage.getItem('token'),
+          Authorization: localStorage.getItem('token'),
         },
       })
         .then(res => res.json())
@@ -31,31 +31,31 @@ function CardList({ filter, URI }) {
     } else if (location.pathname === '/searchlist') {
       // let params = new URLSearchParams(location.search);
       let params = window.location.search;
-      fetch('http://43.201.0.95:8000/searchlist' + params)
+      fetch('http://' + URI + ':8000/searchlist' + params)
         .then(res => res.json())
         .then(data => {
           setData(data.searchResult);
         });
     } else if (location.pathname === '/category/fashion') {
-      fetch('http://43.201.0.95:8000/category/fashion')
+      fetch('http://' + URI + ':8000/category/fashion')
         .then(res => res.json())
         .then(data => {
           setData(data);
         });
     } else if (location.pathname === '/category/travel') {
-      fetch('http://43.201.0.95:8000/category/travel')
+      fetch('http://' + URI + ':8000/category/travel')
         .then(res => res.json())
         .then(data => {
           setData(data);
         });
     } else if (location.pathname === '/category/pattern') {
-      fetch('http://43.201.0.95:8000/category/pattern')
+      fetch('http://' + URI + ':8000/category/pattern')
         .then(res => res.json())
         .then(data => {
           setData(data);
         });
     } else if (location.pathname === '/category/animal') {
-      fetch('http://43.201.0.95:8000/category/animal')
+      fetch('http://' + URI + ':8000/category/animal')
         .then(res => res.json())
         .then(data => {
           setData(data);
@@ -63,7 +63,7 @@ function CardList({ filter, URI }) {
     } else if (location.pathname === '/searchlist') {
       // let params = new URLSearchParams(location.search);
       let params = window.location.search;
-      fetch('http://43.201.0.95:8000/works/' + params)
+      fetch('http://' + URI + ':8000/works/' + params)
         .then(res => res.json())
         .then(data => {
           setData(data.searchResult);
@@ -71,7 +71,7 @@ function CardList({ filter, URI }) {
     } else if (location.pathname === '/searchlist') {
       // let params = new URLSearchParams(location.search);
       let params = window.location.search;
-      fetch('http://43.201.0.95:8000/works/' + params)
+      fetch('http://' + URI + ':8000/works/' + params)
         .then(res => res.json())
         .then(data => {
           setData(data.searchResult);
