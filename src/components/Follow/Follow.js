@@ -14,7 +14,7 @@ const Follow = ({ type, writerInfo }) => {
     setOpenLoginPage(false);
   }
 
-  function clickLoginBtn(event) {
+  function clickLoginBtn() {
     alert('로그인한 다음 이용해 주세요.');
     setOpenLoginPage(true);
   }
@@ -38,16 +38,16 @@ const Follow = ({ type, writerInfo }) => {
   const params = useParams();
   useEffect(() => {
     //팔로우 버튼 데이터 가져오기
-    fetch('http://43.201.0.95:8000/works/feed/' + params.id + '/followcheck', {
+    fetch('http://localhost:8000/works/feed/' + params.id + '/followcheck', {
       headers: {
         'Content-Type': 'application/json',
-        token: localStorage.getItem('token'),
+        authorization: token,
       },
     })
       .then(res => res.json())
       .then(json => {
-        setIsFollow(json.checkFollow[0].success);
-        console.log(isFollow);
+        setIsFollow(json.follow_check);
+        console.log('json.isFollow : ', isFollow);
       });
   }, [params.id]);
 
@@ -59,34 +59,64 @@ const Follow = ({ type, writerInfo }) => {
 
   //팔로우,언팔로우 함수
   const sendResult = e => {
-    if (e.target.className === 'followBtn') {
+    if (e.target.className.includes('followBtn')) {
       //POST 작가id, 토큰
       fetch('http://43.201.0.95:8000/follow', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          token: localStorage.getItem('token'),
+          authorization: token,
         },
         body: JSON.stringify({
           following_id: writerInfo.id,
         }),
-      })
-        .then(res => res.json())
-        .then(json => {});
-    } else if (e.target.className === 'followingBtn') {
+      });
+    } else if (e.target.className.includes('followingBtn')) {
       //DELETE 작가id, 토큰
       fetch('http://43.201.0.95:8000/follow', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          token: localStorage.getItem('token'),
+          authorization: token,
         },
         body: JSON.stringify({
           following_id: writerInfo.id,
         }),
-      })
-        .then(res => res.json())
-        .then(json => {});
+      });
+    }
+  };
+  console.log(isClick);
+  // console.log(isFollow);
+  const checkFollow = () => {
+    if (isLogin && isFollow) {
+      return (
+        <div
+          className={
+            isClick ? `${css.shortFollowingBtn}` : `${css.shortFollowBtn}`
+          }
+          onClick={sendResult}
+        >
+          {isClick ? '팔로잉' : '팔로우'}
+        </div>
+      );
+    } else if (isLogin && isFollow === false) {
+      console.log('false입니다..');
+      return (
+        <div
+          className={
+            isClick ? `${css.shortFollowBtn}` : `${css.shortFollowingBtn}`
+          }
+          onClick={sendResult}
+        >
+          {isClick ? '팔로우' : '팔로잉'}
+        </div>
+      );
+    } else {
+      return (
+        <div className={css.shortFollowBtn} onClick={clickLoginBtn}>
+          팔로우
+        </div>
+      );
     }
   };
   return (
@@ -101,36 +131,7 @@ const Follow = ({ type, writerInfo }) => {
       )}
       {openJoinPage && <Join setJoinPage={setJoinPage} />}
       {/* login창 로직 추가 코드 종료*/}
-      {/* 
-        로그인 한 상태이면서 팔로우한 상태에서만 팔로잉 버튼 
-        1 : 팔로잉 되어있는 상태 (하얀 버튼)
-        0 : 팔로잉 되어있지 않은 상태 (초록 버튼)
-      */}
-      {isLogin ? (
-        isFollow == 1 ? (
-          <div
-            className={
-              isClick ? `${css.shortFollowBtn}` : `${css.shortFollowingBtn}`
-            }
-            onClick={sendResult}
-          >
-            {isClick ? '팔로우' : '팔로잉'}
-          </div>
-        ) : (
-          <div
-            className={
-              isClick ? `${css.shortFollowingBtn}` : `${css.shortFollowBtn}`
-            }
-            onClick={sendResult}
-          >
-            {isClick ? '팔로잉' : '팔로우'}
-          </div>
-        )
-      ) : (
-        <div className={css.longFollowBtn} onClick={clickLoginBtn}>
-          팔로우
-        </div>
-      )}
+      {checkFollow()}
     </div>
   );
 };
