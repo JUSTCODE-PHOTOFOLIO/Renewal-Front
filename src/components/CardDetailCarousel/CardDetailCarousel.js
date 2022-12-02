@@ -25,61 +25,7 @@ const CardDetailCarousel = ({ URI }) => {
         setWorks(json.moreFeedinfo[0].more_feed);
         setWriterInfo(json.writerInfo[0]);
       });
-
-    //팔로우 버튼 데이터 가져오기
-    fetch('http://' + URI + ':8000/works/feed/' + params.id + '/followcheck', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: localStorage.getItem('token'),
-      },
-    })
-      .then(res => res.json())
-      .then(json => {
-        setIsFollow(json.checkFollow[0].success);
-      });
   }, [params.id]);
-
-  //클릭 여부 확인
-  const [isClick, setIsClick] = useState(isFollow);
-  const handleToggle = () => {
-    setIsClick(!isClick);
-  };
-
-  //팔로우,언팔로우 함수
-  const sendResult = e => {
-    if (e.target.className === 'followBtn') {
-      //POST 작가id, 토큰
-      fetch('http://' + URI + ':8000/follow', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: localStorage.getItem('token'),
-        },
-        body: JSON.stringify({
-          following_id: writerInfo.id,
-        }),
-      })
-        .then(res => res.json())
-        .then(json => {});
-    } else if (e.target.className === 'followingBtn') {
-      //DELETE 작가id, 토큰
-      fetch('http://' + URI + ':8000/follow', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: localStorage.getItem('token'),
-        },
-        body: JSON.stringify({
-          following_id: writerInfo.id,
-        }),
-      })
-        .then(res => res.json())
-        .then(json => {});
-    }
-  };
-  console.log('isFollow : ', isFollow);
-  console.log('isLogin : ', isLogin);
-  console.log('isClick : ', isClick);
 
   //캐러셀 내부 ul 위치 파악
   //1이면 맨 처음(index같은 느낌)
@@ -155,7 +101,7 @@ const CardDetailCarousel = ({ URI }) => {
               </div>
             </div>
           </div>
-          <Follow writerInfo={writerInfo} />
+          <Follow writerInfo={writerInfo} URI={URI} />
         </div>
         {/* Carousel */}
         {works === null ? (

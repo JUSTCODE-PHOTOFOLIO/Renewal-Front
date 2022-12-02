@@ -4,8 +4,8 @@ import Login from '../Login/Login';
 import Join from '../Join/Join';
 import { useParams } from 'react-router-dom';
 
-const Follow = ({ type, writerInfo }) => {
-  const [isFollow, setIsFollow] = useState(0);
+const Follow = ({ type, writerInfo, URI }) => {
+  const [isFollow, setIsFollow] = useState(false);
 
   //login창 로직 추가 코드
   const [openLoginpage, setOpenLoginPage] = useState(false);
@@ -37,32 +37,36 @@ const Follow = ({ type, writerInfo }) => {
   //페이지 첫 렌더링 시 데이터 불러오기
   const params = useParams();
   useEffect(() => {
-    //팔로우 버튼 데이터 가져오기
-    fetch('http://localhost:8000/works/feed/' + params.id + '/followcheck', {
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: token,
-      },
-    })
-      .then(res => res.json())
-      .then(json => {
-        setIsFollow(json.follow_check);
-        console.log('json.isFollow : ', isFollow);
-      });
+    if (token) {
+      //팔로우 버튼 데이터 가져오기
+      fetch(
+        'http://' + URI + ':8000/works/feed/' + params.id + '/followcheck',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            authorization: token,
+          },
+        }
+      )
+        .then(res => res.json())
+        .then(json => {
+          setIsFollow(json.follow_check);
+        });
+    }
   }, [params.id]);
 
   //클릭 여부 확인
-  const [isClick, setIsClick] = useState(isFollow);
+  const [isClick, setIsClick] = useState(!isFollow);
   const handleToggle = () => {
     setIsClick(!isClick);
   };
 
   //팔로우,언팔로우 함수
   const sendResult = e => {
-    if (e.target.className.includes('followBtn')) {
-      //POST 작가id, 토큰
-      fetch('http://43.201.0.95:8000/follow', {
-        method: 'POST',
+    if (e.target.className.includes('FollowingBtn')) {
+      //DELETE 작가id, 토큰
+      fetch('http://' + URI + ':8000/follow', {
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           authorization: token,
@@ -71,10 +75,10 @@ const Follow = ({ type, writerInfo }) => {
           following_id: writerInfo.id,
         }),
       });
-    } else if (e.target.className.includes('followingBtn')) {
-      //DELETE 작가id, 토큰
-      fetch('http://43.201.0.95:8000/follow', {
-        method: 'DELETE',
+    } else if (e.target.className.includes('FollowBtn')) {
+      //POST 작가id, 토큰
+      fetch('http://' + URI + ':8000/follow', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           authorization: token,
@@ -85,8 +89,6 @@ const Follow = ({ type, writerInfo }) => {
       });
     }
   };
-  console.log(isClick);
-  // console.log(isFollow);
   const checkFollow = () => {
     if (isLogin && isFollow) {
       return (
@@ -100,7 +102,6 @@ const Follow = ({ type, writerInfo }) => {
         </div>
       );
     } else if (isLogin && isFollow === false) {
-      console.log('false입니다..');
       return (
         <div
           className={
@@ -131,6 +132,8 @@ const Follow = ({ type, writerInfo }) => {
       )}
       {openJoinPage && <Join setJoinPage={setJoinPage} />}
       {/* login창 로직 추가 코드 종료*/}
+
+      {/* //TODO 현재 로그인 되어있는 사람 id값이랑 해당 작품의 작가의 id가 같으면 팔로우버튼 안보이게 해버리자 */}
       {checkFollow()}
     </div>
   );
