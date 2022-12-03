@@ -55,6 +55,7 @@ const Follow = ({ type, writerInfo, URI }) => {
 
   //팔로우,언팔로우 함수
   const sendResult = e => {
+    console.log('클릭!');
     if (e.target.className.includes('FollowingBtn')) {
       //DELETE 작가id, 토큰
       fetch('http://' + URI + ':8000/follow', {
@@ -95,7 +96,7 @@ const Follow = ({ type, writerInfo, URI }) => {
     }
   };
 
-  const checkFollow = () => {
+  const checkShortFollow = () => {
     if (isLogin && isFollow) {
       return (
         <div className={css.shortFollowingBtn} onClick={sendResult}>
@@ -118,6 +119,30 @@ const Follow = ({ type, writerInfo, URI }) => {
       );
     }
   };
+
+  const checkLongFollow = () => {
+    if (isLogin && isFollow) {
+      return (
+        <div className={css.longFollowingBtn} onClick={sendResult}>
+          팔로잉
+        </div>
+      );
+    } else if (isLogin && isFollow === false) {
+      return (
+        <div className={css.longFollowBtn} onClick={sendResult}>
+          팔로우
+        </div>
+      );
+    } else if (isLogin && errorMessage) {
+      alert('잠시 후 다시 시도해주세요.');
+    } else {
+      return (
+        <div className={css.longFollowBtn} onClick={clickLoginBtn}>
+          팔로우
+        </div>
+      );
+    }
+  };
   return (
     <div className={css.followBtns}>
       {/* login창 로직 추가 코드 */}
@@ -132,7 +157,7 @@ const Follow = ({ type, writerInfo, URI }) => {
       {/* login창 로직 추가 코드 종료*/}
 
       {/* //TODO 현재 로그인 되어있는 사람 id값이랑 해당 작품의 작가의 id가 같으면 팔로우버튼 안보이게 해버리자 */}
-      {checkFollow()}
+      {type === 'short' ? checkShortFollow() : checkLongFollow()}
     </div>
   );
 };
