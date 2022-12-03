@@ -95,8 +95,11 @@ const Follow = ({ type, writerInfo, URI }) => {
     }
   };
 
+  let loginId = localStorage.getItem('id');
   const checkShortFollow = () => {
-    if (isLogin && isFollow) {
+    if (isLogin && Number(loginId) === Number(writerInfo.id)) {
+      return <div></div>;
+    } else if (isLogin && isFollow) {
       return (
         <div className={css.shortFollowingBtn} onClick={sendResult}>
           팔로잉
@@ -120,7 +123,9 @@ const Follow = ({ type, writerInfo, URI }) => {
   };
 
   const checkLongFollow = () => {
-    if (isLogin && isFollow) {
+    if (isLogin && Number(loginId) === Number(writerInfo.id)) {
+      return <div></div>;
+    } else if (isLogin && isFollow) {
       return (
         <div className={css.longFollowingBtn} onClick={sendResult}>
           팔로잉
