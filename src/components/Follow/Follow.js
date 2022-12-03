@@ -44,7 +44,7 @@ const Follow = ({ type, writerInfo, URI }) => {
         {
           headers: {
             'Content-Type': 'application/json',
-            authorization: token,
+            Authorization: token,
           },
         }
       )
@@ -69,7 +69,7 @@ const Follow = ({ type, writerInfo, URI }) => {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          authorization: token,
+          Authorization: token,
         },
         body: JSON.stringify({
           following_id: writerInfo.id,
@@ -81,7 +81,7 @@ const Follow = ({ type, writerInfo, URI }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          authorization: token,
+          Authorization: token,
         },
         body: JSON.stringify({
           following_id: writerInfo.id,
