@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 
 const Follow = ({ type, writerInfo, URI }) => {
   const [isFollow, setIsFollow] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   //login창 로직 추가 코드
   const [openLoginpage, setOpenLoginPage] = useState(false);
@@ -50,7 +51,7 @@ const Follow = ({ type, writerInfo, URI }) => {
           setIsFollow(json.follow_check);
         });
     }
-  }, [params.id]);
+  }, [params.id, URI, token]);
 
   //팔로우,언팔로우 함수
   const sendResult = e => {
@@ -84,7 +85,12 @@ const Follow = ({ type, writerInfo, URI }) => {
       })
         .then(res => res.json())
         .then(json => {
-          setIsFollow(json.follow_check);
+          if (json.follow_check) {
+            setIsFollow(json.follow_check);
+            setErrorMessage('');
+          } else {
+            setErrorMessage(json.message);
+          }
         });
     }
   };
@@ -102,6 +108,8 @@ const Follow = ({ type, writerInfo, URI }) => {
           팔로우
         </div>
       );
+    } else if (isLogin && errorMessage) {
+      alert('잠시 후 다시 시도해주세요.');
     } else {
       return (
         <div className={css.shortFollowBtn} onClick={clickLoginBtn}>
