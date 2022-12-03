@@ -39,15 +39,12 @@ const Follow = ({ type, writerInfo, URI }) => {
   useEffect(() => {
     if (token) {
       //팔로우 버튼 데이터 가져오기
-      fetch(
-        'http://' + URI + ':8000/works/feed/' + params.id + '/followcheck',
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: token,
-          },
-        }
-      )
+      fetch('http://' + URI + ':8000/follow/' + params.id, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token,
+        },
+      })
         .then(res => res.json())
         .then(json => {
           setIsFollow(json.follow_check);
