@@ -32,6 +32,10 @@ function Login({ closeLoginpage, setJoinPage, setOpenLoginPage, URI }) {
       })
         .then(res => res.json())
         .then(res => {
+          if (res.message === '회원가입 내역이 없으시네요.')
+            return alert(res.message);
+          if (res.message === '비밀번호가 다릅니다.') return alert(res.message);
+
           if (res.token !== undefined) {
             localStorage.setItem('token', res.token);
             localStorage.setItem('profile_image', res.profile);

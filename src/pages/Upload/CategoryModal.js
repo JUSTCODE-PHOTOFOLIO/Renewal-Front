@@ -1,9 +1,10 @@
 import React from 'react';
 import './categoryModal.scss';
 
-function App({ setCategoryState, setCategory_name }) {
+function App({ setCategoryState, setCategory_name, setModalAlretSpanValue }) {
   function checkCategory(event) {
     setCategory_name(event.target.value);
+    setModalAlretSpanValue(event.target.value);
     setCategoryState(false);
   }
   return (
