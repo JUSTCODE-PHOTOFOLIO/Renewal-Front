@@ -51,16 +51,16 @@ function App() {
     if (params.id === 'helloartist') setCategory('헬로! 아티스트');
   }, []);
 
-  useEffect(() => {
-    console.log(category);
-  }, [category]);
-
   return (
-    <div>
+    <>
       <Header />
-      <div className="categoryComponent">
-        <div className="categoryName" onClick={clickCategory}>
-          {category} ▼
+      <div className={`categoryComponent ${params.id}Img`}>
+        <div className="mosaicDiv">
+          <div className={`insideComponent ${params.id}Img`}>
+            <div className="categoryName" onClick={clickCategory}>
+              {category} ▼
+            </div>
+          </div>
         </div>
       </div>
       {categorySelect && (
@@ -96,7 +96,7 @@ function App() {
       )}
       <CardList URI={URI} />
       <Footer />
-    </div>
+    </>
   );
 }
 
