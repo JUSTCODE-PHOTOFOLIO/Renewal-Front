@@ -52,12 +52,6 @@ const Follow = ({ type, writerInfo, URI }) => {
     }
   }, [params.id]);
 
-  //클릭 여부 확인
-  const [isClick, setIsClick] = useState(!isFollow);
-  const handleToggle = () => {
-    setIsClick(!isClick);
-  };
-
   //팔로우,언팔로우 함수
   const sendResult = e => {
     if (e.target.className.includes('FollowingBtn')) {
@@ -71,7 +65,11 @@ const Follow = ({ type, writerInfo, URI }) => {
         body: JSON.stringify({
           following_id: writerInfo.id,
         }),
-      });
+      })
+        .then(res => res.json())
+        .then(json => {
+          setIsFollow(json.follow_check);
+        });
     } else if (e.target.className.includes('FollowBtn')) {
       //POST 작가id, 토큰
       fetch('http://' + URI + ':8000/follow', {
@@ -83,30 +81,25 @@ const Follow = ({ type, writerInfo, URI }) => {
         body: JSON.stringify({
           following_id: writerInfo.id,
         }),
-      });
+      })
+        .then(res => res.json())
+        .then(json => {
+          setIsFollow(json.follow_check);
+        });
     }
   };
+
   const checkFollow = () => {
     if (isLogin && isFollow) {
       return (
-        <div
-          className={
-            isClick ? `${css.shortFollowingBtn}` : `${css.shortFollowBtn}`
-          }
-          onClick={sendResult}
-        >
-          {isClick ? '팔로잉' : '팔로우'}
+        <div className={css.shortFollowingBtn} onClick={sendResult}>
+          팔로잉
         </div>
       );
     } else if (isLogin && isFollow === false) {
       return (
-        <div
-          className={
-            isClick ? `${css.shortFollowBtn}` : `${css.shortFollowingBtn}`
-          }
-          onClick={sendResult}
-        >
-          {isClick ? '팔로우' : '팔로잉'}
+        <div className={css.shortFollowBtn} onClick={sendResult}>
+          팔로우
         </div>
       );
     } else {
@@ -118,7 +111,7 @@ const Follow = ({ type, writerInfo, URI }) => {
     }
   };
   return (
-    <div className={css.followBtns} onClick={handleToggle}>
+    <div className={css.followBtns}>
       {/* login창 로직 추가 코드 */}
       {openLoginpage && (
         <Login
