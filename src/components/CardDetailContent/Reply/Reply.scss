@@ -3,14 +3,46 @@
   margin: 0 auto;
   padding: 15px 0px;
   border-bottom: 1px solid #ededed;
-  .detail-reply-profile-img {
+  .reply-top-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    .menu {
+      display: inline-block;
+      background: url('./../../../assets/image/menu.png');
+      background-repeat: no-repeat;
+      background-size: 18px;
+      border: none;
+      border: none;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+    .selectMenuWrapper {
+      border: 1px solid #ddd;
+      background-color: #fff;
+      width: 70px;
+      margin-left: 745px;
+      position: absolute;
+      z-index: 100;
+      top: 23px;
+      left: 75px;
+      .selectMenu {
+        height: 41px;
+        padding: 10px 10px 10px 10px;
+        text-align: center;
+        font-size: 15px;
+        cursor: pointer;
+      }
+    }
+    .detail-reply-writer {
+      font-size: 13px;
+      color: #111111;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
   }
-  .detail-reply-writer {
-    font-size: 13px;
-    color: #111111;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
+
   .detail-reply-content {
     font-size: 13px;
     color: #333333;

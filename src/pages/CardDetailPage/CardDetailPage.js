@@ -16,7 +16,6 @@ const CardDetailPage = () => {
   const [tags, setTags] = useState([]); //태그
   const [feedImg, setFeedImg] = useState([]);
   const [userId, setUserId] = useState([]); //user_id
-
   const [info, setInfo] = useState({});
   const [works, setWorks] = useState([]);
   const [writerInfo, setWriterInfo] = useState([]);
@@ -44,6 +43,7 @@ const CardDetailPage = () => {
         setInfo(res.moreFeedinfo[0]);
         setWorks(res.moreFeedinfo[0].more_feed);
         setWriterInfo(res.writerInfo[0]);
+
         //TODO: setlikeBtn(res.)
       });
   }, [id]);
@@ -63,6 +63,7 @@ const CardDetailPage = () => {
     })
       .then(res => res.json())
       .then(res => setReplyArray(res.data));
+    reply.current.value = '';
   };
 
   const navigate = useNavigate();
@@ -88,6 +89,25 @@ const CardDetailPage = () => {
     } else {
       setMenuBtn(false);
     }
+  };
+
+  //게시물 삭제
+  const deleteContent = () => {
+    alert(
+      `작품을 정말 삭제하시겠습니까?                                                 작품을 삭제하면 댓글 정보까지 영구히 삭제됩니다.`
+    );
+    fetch('http://' + URI + ':8000/comments', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
+      },
+      body: JSON.stringify({ id: id, comment: reply.current.value }),
+    })
+      .then(res => res.json())
+      .then(res => {});
+    alert('작품이 삭제되었습니다.');
+    navigate(`/channel/${userId}`);
   };
 
   //TODO:
@@ -117,7 +137,6 @@ const CardDetailPage = () => {
   //       setLikeCnt(res.data);
   //     });
   // };
-
   return (
     <Fragment>
       <Header />
@@ -135,29 +154,39 @@ const CardDetailPage = () => {
           <div className="detail-title-wrapper">
             <h3 className="detail-title">{cardDetailContents.title}</h3>
           </div>
-          <span className="detail-writer-by">by</span>
-          <button
-            className="detail-writer-nickname"
-            onClick={() => navigate(`/channel/${userId}`)}
-          >
-            {cardDetailContents.kor_name}
-          </button>
-          <span className="detail-date">{cardDetailContents.created_at}</span>
-          <span className="detail-inquiry-count">
-            조회수{cardDetailContents.view_count}
-          </span>
-          <span className="menuIcon" onClick={menuClick}></span>
-          {/* {idCheck == user_id && ()} */}
-          {menuBtn && (
-            <div className="menuSelectWrapper">
-              <div className="selectModify">
-                수정하기 <span className="selectPen"></span>
-              </div>
-              <div className="selectDelete">
-                삭제하기 <div className="selectBin"></div>
-              </div>
+          <div className="detailInnerWrapper">
+            <div>
+              <span className="detail-writer-by">by</span>
+              <button
+                className="detail-writer-nickname"
+                onClick={() => navigate(`/channel/${userId}`)}
+              >
+                {cardDetailContents.kor_name}
+              </button>
+              <span className="detail-date">
+                {cardDetailContents.created_at}
+              </span>
+              <span className="detail-inquiry-count">
+                조회수{cardDetailContents.view_count}
+              </span>
             </div>
-          )}
+            {idCheck == cardDetailContents.user_id && (
+              <span className="menuIcon" onClick={menuClick} />
+            )}
+            {menuBtn && (
+              <>
+                <div className="menuSelectWrapper">
+                  <div className="selectModify">
+                    수정하기 <span className="selectPen"></span>
+                  </div>
+                  <div className="selectDelete" onClick={deleteContent}>
+                    삭제하기
+                    <div className="selectBin" onClick={deleteContent}></div>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
         </div>
         <div className="detail-content-wrapper">
           <div className="detail-content-pictures">
@@ -238,10 +267,13 @@ const CardDetailPage = () => {
               return (
                 <Reply
                   key={reply.id}
+                  id={reply.id}
                   user_id={reply.user_id}
                   kor_name={reply.kor_name}
                   comment={reply.comment}
                   created_at={reply.created_at}
+                  URI={URI}
+                  posting_id={cardDetailContents.id}
                 />
               );
             })}
