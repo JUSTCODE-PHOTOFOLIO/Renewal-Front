@@ -1,25 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ChanelCardList from '../Artwork/ChanelCardList/ChanelCardList';
-import Join from '../Join/Join';
-import Login from '../Login/Login';
+import Follow from '../Follow/Follow';
 import './Channel.scss';
 
 const Channel = ({ URI }) => {
-  const [isFollow, setIsFollow] = useState(0); //팔로잉 상태관리
-
-  //login창 로직 추가 코드
-  const [openLoginpage, setOpenLoginPage] = useState(false);
-  const [openJoinPage, setJoinPage] = useState(false);
-  //로그인 여부 확인
-  const [isLogin, setIsLogin] = useState(false);
-
   const [userInfo, setUserInfo] = useState([]); //유저정보
   const [postArray, setPostArray] = useState([]); //카드정보 데이터
   const [followingInfo, setFollowingInfo] = useState([]); //팔로잉정보 데이터
   const [followerInfo, setFollowerInfo] = useState([]); //팔로워정보 데이터
   const id = localStorage.getItem('id');
-  const [isClick, setIsClick] = useState(isFollow); //클릭 여부 확인
   let param = useParams();
   let params = param.user_id;
 
@@ -32,94 +22,15 @@ const Channel = ({ URI }) => {
     })
       .then(res => res.json())
       .then(result => {
-        setUserInfo(result.userInfo[0]);
+        setUserInfo(result.writerInfo[0]);
         setPostArray(result.usersPosts);
         setFollowingInfo(result.userFollowingInfo[0]);
         setFollowerInfo(result.userFollowerInfo[0]);
       });
-
-    //팔로우 버튼
-    // fetch('http://' + URI + ':8000/works/feed/' + params + '/followcheck', {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     token: localStorage.getItem('token'),
-    //   },
-    // })
-    //   .then(res => res.json())
-    //   .then(json => {
-    //     setIsFollow(json.checkFollow[0].success);
-    //   });
   }, []);
-
-  //로그인 모달창 닫기
-  function closeLoginpage() {
-    setOpenLoginPage(false);
-  }
-  //로그인 하지 않았을 시
-  function clickLoginBtn(event) {
-    alert('로그인한 다음 이용해 주세요.');
-    setOpenLoginPage(true);
-  }
-
-  //localStorage에 token 유무 체크
-  const token = localStorage.getItem('token');
-  useEffect(() => {
-    if (token) {
-      setIsLogin(true);
-      return;
-    } else if (!token) {
-      setIsLogin(false);
-      return;
-    }
-  }, [token]);
-
-  const handleToggle = () => {
-    setIsClick(!isClick);
-  };
-
-  //팔로우,언팔로우 함수
-  const sendResult = e => {
-    if (e.target.className === 'followBtn') {
-      //POST 작가id, 토큰
-      fetch('http://' + URI + ':8000/follow', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          token: localStorage.getItem('token'),
-        },
-        body: JSON.stringify({
-          following_id: userInfo.user_id,
-        }),
-      })
-        .then(res => res.json())
-        .then(json => {});
-    } else if (e.target.className === 'followingBtn') {
-      //DELETE 작가id, 토큰
-      fetch('http://' + URI + ':8000/follow', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          token: localStorage.getItem('token'),
-        },
-        body: JSON.stringify({
-          following_id: userInfo.user_id,
-        }),
-      })
-        .then(res => res.json())
-        .then(json => {});
-    }
-  };
 
   return (
     <>
-      {openLoginpage && (
-        <Login
-          closeLoginpage={closeLoginpage}
-          setJoinPage={setJoinPage}
-          setOpenLoginPage={setOpenLoginPage}
-        />
-      )}
-      {openJoinPage && <Join setJoinPage={setJoinPage} />}
       <div className="channel-out-wrapper">
         <div className="channel-content-wrapper">
           <div className="channel-content-left-wrapper">
@@ -140,36 +51,14 @@ const Channel = ({ URI }) => {
                 {followingInfo.following_cnt}
               </span>
               <div className="channel-account-info-btn-wrapper">
-                {id == userInfo.user_id ? (
+                {id == userInfo.id ? (
                   <button className="channel-account-info-me-btn">
                     <Link to="/accountInfo" style={{ color: '#00d084' }}>
                       계정정보 수정
                     </Link>
                   </button>
                 ) : (
-                  <div className="followBtns" onClick={handleToggle}>
-                    {isLogin ? (
-                      isFollow == 1 ? (
-                        <div
-                          className={isClick ? 'followBtn' : 'followingBtn'}
-                          onClick={sendResult}
-                        >
-                          {isClick ? '팔로우' : '팔로잉'}
-                        </div>
-                      ) : (
-                        <div
-                          className={isClick ? 'followingBtn' : 'followBtn'}
-                          onClick={sendResult}
-                        >
-                          {isClick ? '팔로잉' : '팔로우'}
-                        </div>
-                      )
-                    ) : (
-                      <div className="followBtn" onClick={clickLoginBtn}>
-                        팔로우
-                      </div>
-                    )}
-                  </div>
+                  <Follow URI={URI} writerInfo={userInfo} />
                 )}
               </div>
             </div>
@@ -203,7 +92,7 @@ const Channel = ({ URI }) => {
                   <ChanelCardList URI={URI} />
                 </div>
               ) : // 작품 데이터가 없다면, 현재 로그인 한 사람과 같은지 다른 사람인지 체크
-              id == userInfo.user_id ? (
+              id == userInfo.id ? (
                 <div className="feed-channel-feed-div channel-feed-text">
                   등록된 작품이 없습니다. <br />
                   <button className="channel-feed-upload-btn">
