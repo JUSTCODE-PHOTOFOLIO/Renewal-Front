@@ -57,48 +57,7 @@
         }
       }
     }
-    .followBtn {
-      width: 104px;
-      height: 42px;
-      border-radius: 3px;
-      text-indent: 40px;
-      line-height: 42px;
-      cursor: pointer;
-      background : {
-        color: #00d084;
-        image: url('../../assets/image/following.png');
-        size: 18px;
-        repeat: no-repeat;
-        position: 20% 50%;
-      }
-      color: #fff;
-      font : {
-        size: 14px;
-        weight: 700;
-      }
-    }
 
-    .followingBtn {
-      width: 104px;
-      height: 42px;
-      border-radius: 3px;
-      text-indent: 40px;
-      line-height: 42px;
-      cursor: pointer;
-      background : {
-        color: #fff;
-        image: url('../../assets/image/check.png');
-        size: 18px;
-        repeat: no-repeat;
-        position: 20% 50%;
-      }
-      color: #00d084;
-      font : {
-        size: 14px;
-        weight: 700;
-      }
-      border: 1px solid #00d084;
-    }
     border-bottom: 1px solid #ececec;
   }
 
