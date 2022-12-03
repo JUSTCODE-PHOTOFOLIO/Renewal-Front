@@ -101,7 +101,7 @@ const CardDetailCarousel = ({ URI }) => {
               </div>
             </div>
           </div>
-          <Follow writerInfo={writerInfo} URI={URI} />
+          <Follow writerInfo={writerInfo} URI={URI} type={'short'} />
         </div>
         {/* Carousel */}
         {works === null ? (

@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 
 const Follow = ({ type, writerInfo, URI }) => {
   const [isFollow, setIsFollow] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   //login창 로직 추가 코드
   const [openLoginpage, setOpenLoginPage] = useState(false);
@@ -39,27 +40,18 @@ const Follow = ({ type, writerInfo, URI }) => {
   useEffect(() => {
     if (token) {
       //팔로우 버튼 데이터 가져오기
-      fetch(
-        'http://' + URI + ':8000/works/feed/' + params.id + '/followcheck',
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: token,
-          },
-        }
-      )
+      fetch('http://' + URI + ':8000/follow/' + params.id, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token,
+        },
+      })
         .then(res => res.json())
         .then(json => {
           setIsFollow(json.follow_check);
         });
     }
-  }, [params.id]);
-
-  //클릭 여부 확인
-  const [isClick, setIsClick] = useState(!isFollow);
-  const handleToggle = () => {
-    setIsClick(!isClick);
-  };
+  }, [params.id, URI, token]);
 
   //팔로우,언팔로우 함수
   const sendResult = e => {
@@ -74,7 +66,11 @@ const Follow = ({ type, writerInfo, URI }) => {
         body: JSON.stringify({
           following_id: writerInfo.id,
         }),
-      });
+      })
+        .then(res => res.json())
+        .then(json => {
+          setIsFollow(json.follow_check);
+        });
     } else if (e.target.className.includes('FollowBtn')) {
       //POST 작가id, 토큰
       fetch('http://' + URI + ':8000/follow', {
@@ -86,32 +82,37 @@ const Follow = ({ type, writerInfo, URI }) => {
         body: JSON.stringify({
           following_id: writerInfo.id,
         }),
-      });
+      })
+        .then(res => res.json())
+        .then(json => {
+          if (json.follow_check) {
+            setIsFollow(json.follow_check);
+            setErrorMessage('');
+          } else {
+            setErrorMessage(json.message);
+          }
+        });
     }
   };
-  const checkFollow = () => {
-    if (isLogin && isFollow) {
+
+  let loginId = localStorage.getItem('id');
+  const checkShortFollow = () => {
+    if (isLogin && Number(loginId) === Number(writerInfo.id)) {
+      return <div></div>;
+    } else if (isLogin && isFollow) {
       return (
-        <div
-          className={
-            isClick ? `${css.shortFollowingBtn}` : `${css.shortFollowBtn}`
-          }
-          onClick={sendResult}
-        >
-          {isClick ? '팔로잉' : '팔로우'}
+        <div className={css.shortFollowingBtn} onClick={sendResult}>
+          팔로잉
         </div>
       );
     } else if (isLogin && isFollow === false) {
       return (
-        <div
-          className={
-            isClick ? `${css.shortFollowBtn}` : `${css.shortFollowingBtn}`
-          }
-          onClick={sendResult}
-        >
-          {isClick ? '팔로우' : '팔로잉'}
+        <div className={css.shortFollowBtn} onClick={sendResult}>
+          팔로우
         </div>
       );
+    } else if (isLogin && errorMessage) {
+      alert('잠시 후 다시 시도해주세요.');
     } else {
       return (
         <div className={css.shortFollowBtn} onClick={clickLoginBtn}>
@@ -120,8 +121,34 @@ const Follow = ({ type, writerInfo, URI }) => {
       );
     }
   };
+
+  const checkLongFollow = () => {
+    if (isLogin && Number(loginId) === Number(writerInfo.id)) {
+      return <div></div>;
+    } else if (isLogin && isFollow) {
+      return (
+        <div className={css.longFollowingBtn} onClick={sendResult}>
+          팔로잉
+        </div>
+      );
+    } else if (isLogin && isFollow === false) {
+      return (
+        <div className={css.longFollowBtn} onClick={sendResult}>
+          팔로우
+        </div>
+      );
+    } else if (isLogin && errorMessage) {
+      alert('잠시 후 다시 시도해주세요.');
+    } else {
+      return (
+        <div className={css.longFollowBtn} onClick={clickLoginBtn}>
+          팔로우
+        </div>
+      );
+    }
+  };
   return (
-    <div className={css.followBtns} onClick={handleToggle}>
+    <div className={css.followBtns}>
       {/* login창 로직 추가 코드 */}
       {openLoginpage && (
         <Login
@@ -132,9 +159,7 @@ const Follow = ({ type, writerInfo, URI }) => {
       )}
       {openJoinPage && <Join setJoinPage={setJoinPage} />}
       {/* login창 로직 추가 코드 종료*/}
-
-      {/* //TODO 현재 로그인 되어있는 사람 id값이랑 해당 작품의 작가의 id가 같으면 팔로우버튼 안보이게 해버리자 */}
-      {checkFollow()}
+      {type === 'short' ? checkShortFollow() : checkLongFollow()}
     </div>
   );
 };
