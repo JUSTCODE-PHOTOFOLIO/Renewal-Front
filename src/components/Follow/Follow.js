@@ -55,7 +55,6 @@ const Follow = ({ type, writerInfo, URI }) => {
 
   //팔로우,언팔로우 함수
   const sendResult = e => {
-    console.log('클릭!');
     if (e.target.className.includes('FollowingBtn')) {
       //DELETE 작가id, 토큰
       fetch('http://' + URI + ':8000/follow', {
