@@ -159,8 +159,6 @@ const Follow = ({ type, writerInfo, URI }) => {
       )}
       {openJoinPage && <Join setJoinPage={setJoinPage} />}
       {/* login창 로직 추가 코드 종료*/}
-
-      {/* //TODO 현재 로그인 되어있는 사람 id값이랑 해당 작품의 작가의 id가 같으면 팔로우버튼 안보이게 해버리자 */}
       {type === 'short' ? checkShortFollow() : checkLongFollow()}
     </div>
   );
