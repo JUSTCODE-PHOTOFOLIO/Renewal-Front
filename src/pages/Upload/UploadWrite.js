@@ -10,6 +10,7 @@ function App({
   setCategory_name,
   setPublic_status,
   startFetch,
+  previewImg,
 }) {
   const [tagModalState, setTagModalState] = useState(false); // 태그 추가창 열고 닫기
   const [uploadModalState, setuploadModalState] = useState(false); // ㄹ
@@ -42,6 +43,10 @@ function App({
     if (!tagModalState) setTagModalState(true);
   }
 
+  function clickPreveiw() {
+    document.querySelector('.uploadWriteContent').focus();
+  }
+
   useEffect(() => {
     let temp = '';
     uploadTagData.map(elem => (temp += elem + ','));
@@ -62,7 +67,7 @@ function App({
         ></input>
         <div className="divide"></div>
 
-        {previewState && <div></div>}
+        <img src={previewImg} className="previewImg" onClick={clickPreveiw} />
         <textarea
           ref={contentValue}
           name="content"

@@ -17,6 +17,8 @@ function App() {
   const [cardData, setCardData] = useState();
   const URI = process.env.REACT_APP_BASE_URL;
 
+  const [previewImg, setPreviewImg] = useState(null);
+
   function uploadImageClick(event) {
     event.preventDefault();
   }
@@ -25,6 +27,13 @@ function App() {
     console.log(event.target.files);
     setFile([...event.target.files]);
     setUploadCheck(false);
+
+    let reader = new FileReader();
+    let file = event.target.files[0];
+    reader.onloadend = () => {
+      setPreviewImg(reader.result);
+    };
+    reader.readAsDataURL(file);
   }
 
   function startFetch(event) {
@@ -89,6 +98,7 @@ function App() {
           setCategory_name={setCategory_name}
           setPublic_status={setPublic_status}
           startFetch={startFetch}
+          previewImg={previewImg}
         />
       )}
       <Footer />
