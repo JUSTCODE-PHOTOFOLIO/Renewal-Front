@@ -85,14 +85,11 @@ const Channel = ({ URI }) => {
                 작품
                 <hr />
               </div>
-              {/* 작품 데이터가 있다면 */}
               {postArray.length !== 0 ? (
-                // 작품 리스트를 보여줌
                 <div className="feed-channel-feed-div">
                   <ChanelCardList URI={URI} />
                 </div>
-              ) : // 작품 데이터가 없다면, 현재 로그인 한 사람과 같은지 다른 사람인지 체크
-              id == userInfo.id ? (
+              ) : id == userInfo.id ? (
                 <div className="feed-channel-feed-div channel-feed-text">
                   등록된 작품이 없습니다. <br />
                   <button className="channel-feed-upload-btn">
