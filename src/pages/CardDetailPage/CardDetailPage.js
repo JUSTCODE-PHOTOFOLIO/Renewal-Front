@@ -83,11 +83,7 @@ const CardDetailPage = () => {
 
   //메뉴버튼 클릭시 버튼의 상태 변경
   const menuClick = () => {
-    if (menuBtn == false) {
-      setMenuBtn(true);
-    } else {
-      setMenuBtn(false);
-    }
+    setMenuBtn(!menuBtn);
   };
 
   //게시물 삭제
