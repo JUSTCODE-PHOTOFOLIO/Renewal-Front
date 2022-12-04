@@ -37,6 +37,12 @@ const CategoryCarousel = ({ URI }) => {
     setIsClick(false);
   };
 
+  //clickTest
+  const clickTest = event => {
+    console.log(event.target);
+    console.log(window.getComputedStyle(event.target));
+  };
+
   return (
     <div className="category-wrap">
       <h3>Category</h3>
@@ -66,6 +72,7 @@ const CategoryCarousel = ({ URI }) => {
                     className={
                       'categoryImg ' + category.eng_category_name + 'Img'
                     }
+                    onClick={clickTest}
                   />
                   <div className={'category ' + category.eng_category_name}>
                     <div className="title">

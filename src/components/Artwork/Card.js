@@ -15,6 +15,9 @@ function Card({
 }) {
   const navigate = useNavigate();
 
+  //이제 수정 해야함
+  //왜 저장이 안되지..
+  // ㅇㅁㄹㅇ
   return (
     <div
       className="card"
@@ -24,8 +27,12 @@ function Card({
     >
       <div
         className="cardImg"
-        style={{ backgroundImage: `url(${img_url})`, backgroundSize: 'cover' }}
+        style={{
+          backgroundImage: `url(${img_url})`,
+          backgroundSize: 'cover',
+        }}
       />
+      {/* <img src={img_url} className="cardImg" /> */}
       <div className="cardTitle">
         <span className="cardTitleSpan">{title}</span>
         <div className="cardProfileDiv">
@@ -35,15 +42,15 @@ function Card({
       <div className="cardValue">
         <div className="cardValueMargin">
           <div className="cardValueMargin2">
-            <i class="fa-regular fa-face-smile"></i>
+            <i className="fa-regular fa-face-smile"></i>
             <span className="cardValueSpanMargin">{sympathy_cnt}</span>
           </div>
           <div className="cardValueMargin2">
-            <i class="fa-regular fa-comment"></i>
+            <i className="fa-regular fa-comment"></i>
             <span className="cardValueSpanMargin">{comment_cnt}</span>
           </div>
           <div className="cardValueMargin2" id="viewCount">
-            <i class="fa-regular fa-eye"></i>
+            <i className="fa-regular fa-eye"></i>
             <span className="cardValueSpanMargin">{view_count}</span>
           </div>
         </div>

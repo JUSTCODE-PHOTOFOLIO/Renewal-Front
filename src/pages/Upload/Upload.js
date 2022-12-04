@@ -14,7 +14,7 @@ function App() {
   const [category_name, setCategory_name] = useState(null);
   const [public_status, setPublic_status] = useState(null);
 
-  const [cardData, setCardData] = useState();
+  const [cardData, setCardData] = useState(null);
   const URI = process.env.REACT_APP_BASE_URL;
 
   const [previewImg, setPreviewImg] = useState(null);
@@ -56,34 +56,26 @@ function App() {
     for (let item of formdata.keys()) {
       console.log(item);
     }
-
     setCardData(formdata);
-
-    console.log({
-      file: file,
-      title: title,
-      content: content,
-      tag: tag,
-      category_name: category_name,
-      public_status: public_status,
-    });
   }
 
   useEffect(() => {
-    fetch('http://' + URI + ':8000/upload/form', {
-      method: 'POST',
-      headers: {
-        Authorization: localStorage.getItem('token'),
-      },
-      body: cardData,
-    })
-      .then(res => res.json())
-      .then(res => {
-        console.log(res);
-        if (res.message === '업로드 성공') {
-          window.location.href = 'http://' + URI + ':3000/feeds';
-        }
-      });
+    if (cardData !== null) {
+      fetch('http://' + URI + ':8000/upload/form', {
+        method: 'POST',
+        headers: {
+          Authorization: localStorage.getItem('token'),
+        },
+        body: cardData,
+      })
+        .then(res => res.json())
+        .then(res => {
+          console.log(res);
+          if (res.message === '업로드 성공') {
+            window.location.href = 'http://' + URI + ':3000/feeds';
+          }
+        });
+    }
   }, [cardData]);
 
   return (

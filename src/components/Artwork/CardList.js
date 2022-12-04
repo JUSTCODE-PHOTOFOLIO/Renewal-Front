@@ -8,7 +8,6 @@ function CardList({ filter, URI }) {
   let param = useParams();
   let params = param.user_id;
   let location = useLocation();
-  console.log('http://' + URI + ':8000/works');
   useEffect(() => {
     if (location.pathname === '/works') {
       fetch('http://' + URI + ':8000/works')
@@ -79,28 +78,22 @@ function CardList({ filter, URI }) {
     }
   }, []);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   return (
     <div className="cardList">
       {data.map((elem, idx) => {
         return (
-          <div style={{ cursor: 'pointer' }}>
-            <Card
-              key={idx}
-              id={elem.id}
-              nickname={elem.nickname}
-              profile_image={elem.profile_image}
-              img_url={elem.img_url}
-              title={elem.title}
-              view_count={elem.view_count}
-              created_at={elem.created_at}
-              sympathy_cnt={elem.sympathy_cnt}
-              comment_cnt={elem.comment_cnt}
-            />
-          </div>
+          <Card
+            key={idx}
+            id={elem.id}
+            nickname={elem.nickname}
+            profile_image={elem.profile_image}
+            img_url={elem.img_url}
+            title={elem.title}
+            view_count={elem.view_count}
+            created_at={elem.created_at}
+            sympathy_cnt={elem.sympathy_cnt}
+            comment_cnt={elem.comment_cnt}
+          />
         );
       })}
     </div>

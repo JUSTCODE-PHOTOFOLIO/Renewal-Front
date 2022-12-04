@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import css from './ArtworkFilter.module.scss';
 
 function ArtworkFilter({ curr, name, filter, setFilter }) {
   const [fontWeight, setFontWeight] = useState();
@@ -18,19 +19,18 @@ function ArtworkFilter({ curr, name, filter, setFilter }) {
   }, [filter]);
 
   return (
-    <>
-      <span
-        onClick={clickFilter}
-        style={{
-          margin: '15px',
-          fontWeight: fontWeight,
-          textDecoration: underline,
-          textUnderlinePosition: underlinePosition,
-        }}
-      >
-        {name}
-      </span>
-    </>
+    <span
+      className={css.filter}
+      onClick={clickFilter}
+      style={{
+        margin: '15px',
+        fontWeight: fontWeight,
+        textDecoration: underline,
+        textUnderlinePosition: underlinePosition,
+      }}
+    >
+      {name}
+    </span>
   );
 }
 
