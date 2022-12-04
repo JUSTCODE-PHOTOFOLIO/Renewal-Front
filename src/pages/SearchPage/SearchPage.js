@@ -30,7 +30,6 @@ const SearchPage = () => {
     <Fragment>
       <Header pathname={location.pathname} URI={URI} />
       <SearchBar resultCount={resultCount} URI={URI} />
-      <SearchFilter URI={URI} />
       {searchResult.length === 0 ? (
         <Fragment>
           <div className="noResult">
