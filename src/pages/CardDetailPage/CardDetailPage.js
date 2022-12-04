@@ -44,7 +44,7 @@ const CardDetailPage = () => {
         setInfo(res.moreFeedinfo[0]);
         setWorks(res.moreFeedinfo[0].more_feed);
         setWriterInfo(res.writerInfo[0]);
-        setLikeCnt(Number(res.sympathySortCount[0].sympathy_cnt));
+        setLikeCnt(res.sympathySortCount[0].sympathy_cnt);
       });
     //좋아요 버튼 상태
     fetch('http://' + URI + ':8000/sympathy/' + id, {
@@ -169,7 +169,6 @@ const CardDetailPage = () => {
             src="https://cdn-icons-png.flaticon.com/512/1062/1062573.png"
             alt=""
             onClick={() => {
-              // changeLike();
               clickLike();
             }}
           />
@@ -226,17 +225,15 @@ const CardDetailPage = () => {
               <span className="menuIcon" onClick={menuClick} />
             )}
             {menuBtn && (
-              <>
-                <div className="menuSelectWrapper">
-                  <div className="selectModify">
-                    수정하기 <span className="selectPen" />
-                  </div>
-                  <div className="selectDelete" onClick={deleteContent}>
-                    삭제하기
-                    <div className="selectBin" onClick={deleteContent} />
-                  </div>
+              <div className="menuSelectWrapper">
+                <div className="selectModify">
+                  수정하기 <span className="selectPen" />
                 </div>
-              </>
+                <div className="selectDelete" onClick={deleteContent}>
+                  삭제하기
+                  <div className="selectBin" onClick={deleteContent} />
+                </div>
+              </div>
             )}
           </div>
         </div>
