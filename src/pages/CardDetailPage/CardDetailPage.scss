@@ -3,73 +3,75 @@
   margin: 0 auto;
   .detail-header-wrapper {
     width: 896px;
-    margin: 38px auto;
+    margin: 38px auto 35px auto;
     max-width: 100%;
     .detail-title-wrapper {
       .detail-title {
-        margin-bottom: 0;
+        margin-bottom: 5px;
       }
     }
-    .detail-writer-by {
-      color: #a1a1a1;
-      padding-right: 5px;
-      font-style: italic;
-      font-size: 14px;
-    }
-    .detail-writer-nickname {
-      padding-right: 10px;
-      border-right: 2px solid #dddddd;
-      font-size: 14px;
-      background-color: #ffffff;
-      cursor: pointer;
-    }
-    .detail-date {
-      padding: 0px 10px;
-      border-right: 2px solid #dddddd;
-      color: #a1a1a1;
-      font-size: 14px;
-    }
-    .detail-inquiry-count {
-      padding: 0px 10px;
-      color: #a1a1a1;
-      font-size: 14px;
-      margin-right: 625px;
-    }
-    .menuIcon {
-      display: inline-block;
-      background: url('./../../assets/image/menu.png');
-      background-repeat: no-repeat;
-      background-size: 23px;
-      border: none;
-      width: 23px;
-      height: 23px;
-      cursor: pointer;
-    }
-    .menuSelectWrapper {
-      float: left;
-      border: 1px solid #ddd;
-      background-color: #fff;
-      width: 152px;
-      margin-left: 745px;
+    .detailInnerWrapper {
+      display: flex;
+      justify-content: space-between;
       position: relative;
-      // z-index: 101;
-      .selectModify {
-        height: 41px;
-        padding: 10px 10px 10px 13px;
-        font-size: 15px;
-        border-bottom: 1px solid rgb(241, 241, 241);
-        // z-index: 100;
+      .detail-writer-by {
+        color: #a1a1a1;
+        padding-right: 5px;
+        font-style: italic;
+        font-size: 14px;
+      }
+      .detail-writer-nickname {
+        padding-right: 10px;
+        border-right: 2px solid #dddddd;
+        font-size: 14px;
+        background-color: #ffffff;
         cursor: pointer;
-        .selectPen {
-          display: inline-block;
-          background: url('./../../assets/image/pen.png');
-          background-repeat: no-repeat;
-          background-size: 15px;
-          border: none;
-          width: 15px;
-          height: 15px;
-          margin-left: 45px;
-          // z-index: 100;
+      }
+      .detail-date {
+        padding: 0px 10px;
+        border-right: 2px solid #dddddd;
+        color: #a1a1a1;
+        font-size: 14px;
+      }
+      .detail-inquiry-count {
+        padding: 0px 10px;
+        color: #a1a1a1;
+        font-size: 14px;
+      }
+      .menuIcon {
+        display: inline-block;
+        background: url('./../../assets/image/menu.png');
+        background-repeat: no-repeat;
+        background-size: 23px;
+        border: none;
+        width: 23px;
+        height: 23px;
+        cursor: pointer;
+      }
+      .menuSelectWrapper {
+        border: 1px solid #ddd;
+        background-color: #fff;
+        width: 152px;
+        left: 745px;
+        position: absolute;
+        z-index: 100;
+        top: 28px;
+        .selectModify {
+          height: 41px;
+          padding: 10px 10px 10px 13px;
+          font-size: 15px;
+          border-bottom: 1px solid rgb(241, 241, 241);
+          cursor: pointer;
+          .selectPen {
+            display: inline-block;
+            background: url('./../../assets/image/pen.png');
+            background-repeat: no-repeat;
+            background-size: 15px;
+            border: none;
+            width: 15px;
+            height: 15px;
+            margin-left: 45px;
+          }
         }
       }
       .selectDelete {
@@ -77,7 +79,6 @@
         padding: 10px 10px 10px 13px;
         font-size: 15px;
         cursor: pointer;
-        // z-index: 100;
         .selectBin {
           display: inline-block;
           background: url('./../../assets/image/bin.png');
@@ -87,7 +88,6 @@
           width: 15px;
           height: 15px;
           margin-left: 45px;
-          // z-index: 100;
         }
       }
     }
@@ -96,7 +96,6 @@
   .detail-content-wrapper {
     width: 896px;
     margin: auto;
-    // z-index: 200;
     .detail-content-pictures {
       width: 100%;
       img {
