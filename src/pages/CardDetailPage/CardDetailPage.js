@@ -19,7 +19,7 @@ const CardDetailPage = () => {
   const [info, setInfo] = useState({});
   const [works, setWorks] = useState([]);
   const [writerInfo, setWriterInfo] = useState([]);
-  //TODO: let [likeBtn, setlikeBtn] = useState(false); //좋아요 버튼 상태
+  // let [likeCnt, setlikeCnt] = useState(''); //좋아요 카운트
   const { id } = useParams();
   const token = localStorage.getItem('token');
   const idCheck = localStorage.getItem('id');
@@ -43,8 +43,7 @@ const CardDetailPage = () => {
         setInfo(res.moreFeedinfo[0]);
         setWorks(res.moreFeedinfo[0].more_feed);
         setWriterInfo(res.writerInfo[0]);
-
-        //TODO: setlikeBtn(res.)
+        //TODO: setlikeCnt(res.sympathySortCount[0]);
       });
   }, [id]);
 
@@ -96,47 +95,50 @@ const CardDetailPage = () => {
     alert(
       `작품을 정말 삭제하시겠습니까?                                                 작품을 삭제하면 댓글 정보까지 영구히 삭제됩니다.`
     );
-    fetch('http://' + URI + ':8000/comments', {
-      method: 'POST',
+    fetch('http://' + URI + ':8000/works/feed/' + id, {
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         Authorization: localStorage.getItem('token'),
       },
-      body: JSON.stringify({ id: id, comment: reply.current.value }),
-    })
-      .then(res => res.json())
-      .then(res => {});
+      body: JSON.stringify({ posting_id: id }),
+    });
     alert('작품이 삭제되었습니다.');
     navigate(`/channel/${userId}`);
   };
 
   //TODO:
-  // let [click, setClick] = useState(likeBtn); //좋아요 버튼 클릭 여부
-  // const [likeCnt, setLikeCnt] = useState(0); //좋아요 갯수
+  // const [likeData, setLikeData] = useState(0); //좋아요 데이터
+  // let [likeBtn, setlikeBtn] = useState(false); //좋아요 버튼 상태
 
-  //좋아요 버튼 클릭 여부 확인
-  // const likeBtnClick = () => {
-  //   setlikeBtn(!click);
-  // };
-
-  // //좋아요 누르면 실행되는 로직
+  //좋아요 누르면 실행
   // const clickLike = () => {
-  //   fetch('http://43.201.0.95:8000/works/sympathy', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization: localStorage.getItem('token'),
-  //     },
-  //     body: {
-  //       posting_id: id,
-  //       sympathy_id: 1,
-  //     },
-  //   })
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       setLikeCnt(res.data);
-  //     });
+  //   setlikeBtn(!likeBtn);
   // };
+
+  // useEffect(() => {
+  //   if (token) {
+  //     fetch('http://' + URI + ':8000/works/sympathy', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: localStorage.getItem('token'),
+  //       },
+  //       body: {
+  //         posting_id: id,
+  //         sympathy_id: 1,
+  //       },
+  //     })
+  //       .then(res => res.json())
+  //       .then(res => {
+  //         setLikeData(res.result);
+  //       });
+  //   } else {
+  //     alert('로그인한 다음 이용해 주세요.');
+  //     setOpenLoginPage(true);
+  //   }
+  // }, [likeData]);
+
   return (
     <Fragment>
       <Header />
@@ -219,6 +221,7 @@ const CardDetailPage = () => {
             <div className="detail-reaction-icon-second-wrapper">
               <div className="detail-icon-title">좋아요</div>
               <div className="detail-icon-count">0</div>
+              {/* {likeCnt.sympathy_cnt} */}
             </div>
           </div>
         </div>
