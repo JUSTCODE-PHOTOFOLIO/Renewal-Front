@@ -40,18 +40,22 @@ const Follow = ({ type, writerInfo, URI }) => {
   useEffect(() => {
     if (token) {
       //팔로우 버튼 데이터 가져오기
-      fetch('http://' + URI + ':8000/follow/' + params.id, {
+      fetch('http://' + URI + ':8000/follow/check/', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: token,
         },
+        body: JSON.stringify({
+          id: writerInfo.id,
+        }),
       })
         .then(res => res.json())
         .then(json => {
           setIsFollow(json.follow_check);
         });
     }
-  }, [params.id, URI, token]);
+  }, [writerInfo.id, URI, token]);
 
   //팔로우,언팔로우 함수
   const sendResult = e => {

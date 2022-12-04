@@ -1,32 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+
 import './CardDetailCarousel.scss';
 
 import Follow from '../Follow/Follow';
 
-const CardDetailCarousel = ({ URI }) => {
-  const [info, setInfo] = useState({});
-  const [works, setWorks] = useState([]);
-  const [writerInfo, setWriterInfo] = useState([]);
-
-  //페이지 첫 렌더링 시 데이터 불러오기
-  const params = useParams();
-  useEffect(() => {
-    //팔로우 기능 제외한 데이터 가져오기
-    fetch('http://' + URI + ':8000/works/feed/' + params.id, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: localStorage.getItem('token'),
-      },
-    })
-      .then(res => res.json())
-      .then(json => {
-        setInfo(json.moreFeedinfo[0]);
-        setWorks(json.moreFeedinfo[0].more_feed);
-        setWriterInfo(json.writerInfo[0]);
-      });
-  }, [params.id]);
-
+const CardDetailCarousel = ({ URI, info, works, writerInfo }) => {
   //캐러셀 내부 ul 위치 파악
   //1이면 맨 처음(index같은 느낌)
   const [carouselIndex, setCarouselIndex] = useState(0);
