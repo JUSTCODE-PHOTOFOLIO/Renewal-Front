@@ -19,7 +19,8 @@ const CardDetailPage = () => {
   const [info, setInfo] = useState({});
   const [works, setWorks] = useState([]);
   const [writerInfo, setWriterInfo] = useState([]);
-  // let [likeCnt, setlikeCnt] = useState(''); //좋아요 카운트
+  let [likeCnt, setLikeCnt] = useState(0); //좋아요 카운트
+  let [likeBtn, setLikeBtn] = useState(false); //좋아요 버튼 상태
   const { id } = useParams();
   const token = localStorage.getItem('token');
   const idCheck = localStorage.getItem('id');
@@ -43,7 +44,18 @@ const CardDetailPage = () => {
         setInfo(res.moreFeedinfo[0]);
         setWorks(res.moreFeedinfo[0].more_feed);
         setWriterInfo(res.writerInfo[0]);
-        //TODO: setlikeCnt(res.sympathySortCount[0]);
+        setLikeCnt(Number(res.sympathySortCount[0].sympathy_cnt));
+      });
+    //좋아요 버튼 상태
+    fetch('http://' + URI + ':8000/sympathy/' + id, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+        setLikeBtn(res.checkSympathyByUser);
       });
   }, [id]);
 
@@ -103,37 +115,79 @@ const CardDetailPage = () => {
     navigate(`/channel/${userId}`);
   };
 
-  //TODO:
-  // const [likeData, setLikeData] = useState(0); //좋아요 데이터
-  // let [likeBtn, setlikeBtn] = useState(false); //좋아요 버튼 상태
+  function floatLoginModal() {
+    alert('로그인한 다음 이용해 주세요.');
+    setOpenLoginPage(true);
+  }
 
-  //좋아요 누르면 실행
-  // const clickLike = () => {
-  //   setlikeBtn(!likeBtn);
-  // };
+  //좋아요 버튼을 누르면
+  const clickLike = () => {
+    // 좋아요 카운트 증가
+    if (token && likeBtn === false) {
+      fetch('http://' + URI + ':8000/sympathy', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('token'),
+        },
+        body: JSON.stringify({
+          posting_id: id,
+          sympathy_id: 1,
+        }),
+      })
+        .then(res => res.json())
+        .then(res => {
+          setLikeCnt(res.getSympathiesCount[0].sympathy_cnt);
+          setLikeBtn(true);
+        });
+    } else if (token && likeBtn === true) {
+      // 좋아요 카운트 감소
+      fetch('http://' + URI + ':8000/sympathy', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('token'),
+        },
+        body: JSON.stringify({
+          posting_id: id,
+        }),
+      })
+        .then(res => res.json())
+        .then(res => {
+          setLikeCnt(res.getSympathiesCount[0].sympathy_cnt);
+          setLikeBtn(false);
+        });
+    }
+  };
 
-  // useEffect(() => {
-  //   if (token) {
-  //     fetch('http://' + URI + ':8000/works/sympathy', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         Authorization: localStorage.getItem('token'),
-  //       },
-  //       body: {
-  //         posting_id: id,
-  //         sympathy_id: 1,
-  //       },
-  //     })
-  //       .then(res => res.json())
-  //       .then(res => {
-  //         setLikeData(res.result);
-  //       });
-  //   } else {
-  //     alert('로그인한 다음 이용해 주세요.');
-  //     setOpenLoginPage(true);
-  //   }
-  // }, [likeData]);
+  const likeCheck = () => {
+    if (token) {
+      //로그인을 했을 시
+      return (
+        <button className="detail-icon">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/1062/1062573.png"
+            alt=""
+            onClick={() => {
+              // changeLike();
+              clickLike();
+            }}
+          />
+        </button>
+      );
+    } else {
+      //로그인을 안했을 시
+      return (
+        <button className="detail-icon">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/1062/1062573.png"
+            alt=""
+            onClick={floatLoginModal}
+          />
+        </button>
+      );
+    }
+  };
 
   return (
     <Fragment>
@@ -175,11 +229,11 @@ const CardDetailPage = () => {
               <>
                 <div className="menuSelectWrapper">
                   <div className="selectModify">
-                    수정하기 <span className="selectPen"></span>
+                    수정하기 <span className="selectPen" />
                   </div>
                   <div className="selectDelete" onClick={deleteContent}>
                     삭제하기
-                    <div className="selectBin" onClick={deleteContent}></div>
+                    <div className="selectBin" onClick={deleteContent} />
                   </div>
                 </div>
               </>
@@ -206,18 +260,10 @@ const CardDetailPage = () => {
         {/* 좋아요 */}
         <div className="detail-reaction-wrapper">
           <div className="detail-reaction-inner-wrapper">
-            <div className="detail-reaction-icon-wrapper">
-              <button className="detail-icon">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/1062/1062573.png"
-                  alt=""
-                />
-              </button>
-            </div>
+            <div className="detail-reaction-icon-wrapper">{likeCheck()}</div>
             <div className="detail-reaction-icon-second-wrapper">
               <div className="detail-icon-title">좋아요</div>
-              <div className="detail-icon-count">0</div>
-              {/* {likeCnt.sympathy_cnt} */}
+              <div className="detail-icon-count">{likeCnt}</div>
             </div>
           </div>
         </div>
