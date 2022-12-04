@@ -52,14 +52,12 @@ const Reply = ({
               <span className="menu" onClick={menuClick} />
             )}
             {menuBtn && (
-              <>
-                <div className="selectMenuWrapper">
-                  <div className="selectMenu">수정</div>
-                  <div className="selectMenu" onClick={deleteReply}>
-                    삭제
-                  </div>
+              <div className="selectMenuWrapper">
+                <div className="selectMenu">수정</div>
+                <div className="selectMenu" onClick={deleteReply}>
+                  삭제
                 </div>
-              </>
+              </div>
             )}
           </div>
           <div className="detail-reply-content">{comment}</div>
