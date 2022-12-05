@@ -15,9 +15,6 @@ function Card({
 }) {
   const navigate = useNavigate();
 
-  //이제 수정 해야함
-  //왜 저장이 안되지..
-  // ㅇㅁㄹㅇ
   return (
     <div
       className="card"

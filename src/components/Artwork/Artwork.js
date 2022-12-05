@@ -5,8 +5,9 @@ import './artwork.scss';
 
 function Artwork({ URI }) {
   const [filter, setFilter] = useState(1);
-  const filterArr = ['최신', '주목받는', '데뷰', '발견'];
+  const filterArr = ['최신', '추천순', '공감순'];
   let filterCounter = 1;
+
   return (
     <>
       <div className="artwork">
