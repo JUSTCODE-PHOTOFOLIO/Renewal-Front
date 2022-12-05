@@ -1,8 +1,9 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import SearchFilter from './SearchFilter/SearchFilter';
 import './SearchBar.scss';
 
-const SearchBar = ({ resultCount }) => {
+const SearchBar = ({ resultCount, URI }) => {
   const [content, setContent] = useState('');
   const navigate = useNavigate();
   let location = useLocation();
@@ -30,6 +31,7 @@ const SearchBar = ({ resultCount }) => {
   useEffect(() => {
     setContent(query);
   }, [query]);
+
   return (
     <Fragment>
       <div className="searchKeyWordBar">
@@ -50,6 +52,7 @@ const SearchBar = ({ resultCount }) => {
             onClick={resetInput}
           /> */}
         </div>
+        <SearchFilter URI={URI} />
       </div>
       <div className="count">
         <span>작품 검색 결과: </span>
