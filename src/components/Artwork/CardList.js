@@ -3,19 +3,43 @@ import { useLocation, useParams } from 'react-router-dom';
 import Card from './Card';
 import './cardList.scss';
 
-function CardList({ filter, URI }) {
+function CardList({ filter, URI, testState }) {
   const [data, setData] = useState([]);
+
   let param = useParams();
   let params = param.user_id;
   let location = useLocation();
+
   useEffect(() => {
-    console.log(param);
-    console.log(location.pathname);
-    if (location.pathname === '/works') {
+    if (location.pathname === '/works' && location.search === '') {
       fetch('http://' + URI + ':8000/works')
         .then(res => res.json())
         .then(data => {
           setData(data.worksFeedList);
+        });
+      return;
+    } else if (location.search === '?sort=recommendpoint') {
+      console.log('test1');
+      fetch('http://' + URI + ':8000/works?sort=recommendpoint', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(res => res.json())
+        .then(data => {
+          setData(data.feedsList);
+        });
+      return;
+    } else if (location.search === '?sort=sympathycnt') {
+      console.log('test2');
+      fetch('http://' + URI + ':8000/works?sort=sympathycnt', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(res => res.json())
+        .then(data => {
+          setData(data.feedsList);
         });
       return;
     } else if (location.pathname === '/feeds') {
@@ -87,8 +111,7 @@ function CardList({ filter, URI }) {
         });
       return;
     }
-    console.log(location.pathname);
-  }, []);
+  }, [window.location.href]);
 
   return (
     <div className="cardList">
