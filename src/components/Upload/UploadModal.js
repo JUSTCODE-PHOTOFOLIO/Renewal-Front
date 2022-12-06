@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './uploadModal.scss';
-import CategoryModal from './CategoryModal';
+import CategoryModal from '../../components/Upload/CategoryModal';
 
 function App({
   setuploadModalState,

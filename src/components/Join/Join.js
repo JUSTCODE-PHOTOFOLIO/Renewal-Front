@@ -67,10 +67,6 @@ function Join({ setJoinPage, URI }) {
       })
         .then(res => res.json())
         .then(res => {
-          console.log(res);
-          console.log(res.message);
-          console.log(typeof res.message);
-
           setIdAlert();
           setPwAlert();
           setPwCheckAlert();
@@ -238,7 +234,6 @@ function Join({ setJoinPage, URI }) {
             name="file"
             accept="img/*"
             onChange={onLoadFile}
-            // multiple
           ></input>
 
           <button className="loginBtn" onClick={clickJoin}>

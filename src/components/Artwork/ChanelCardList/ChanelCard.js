@@ -21,7 +21,6 @@ function Card({
         navigate(`/works/${id}`);
       }}
     >
-      {/* <img className="chanelcardImg" src={`url(${img_url})`} alt="" /> */}
       <div
         className="cardImg"
         style={{ backgroundImage: `url(${img_url})`, backgroundSize: 'cover' }}
@@ -34,13 +33,12 @@ function Card({
         </div>
       </div>
       <div className="chanelcardValue">
-        {/* <img src="" alt="" /> */}
         <i class="fa-regular fa-face-smile"></i>
         <span className="cardValueSpanMargin">{sympathy_cnt}</span>
-        {/* <img src="" alt="" /> */}
+
         <i class="fa-regular fa-comment"></i>
         <span className="cardValueSpanMargin">{comment_cnt}</span>
-        {/* <img src="" alt="" /> */}
+
         <i class="fa-regular fa-eye"></i>
         <span className="cardValueSpanMargin">{view_count}</span>
       </div>

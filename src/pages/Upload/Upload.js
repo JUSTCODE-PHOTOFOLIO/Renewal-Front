@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header/Header';
-import UploadMain from './UploadMain';
-import UploadWrite from './UploadWrite';
+import UploadMain from '../../components/Upload/UploadMain';
+import UploadWrite from '../../components/Upload/UploadWrite';
 import Footer from '../../components/Footer/Footer';
 
 function App() {
@@ -19,12 +19,7 @@ function App() {
 
   const [previewImg, setPreviewImg] = useState(null);
 
-  function uploadImageClick(event) {
-    event.preventDefault();
-  }
-
   function onImgChange(event) {
-    console.log(event.target.files);
     setFile([...event.target.files]);
     setUploadCheck(false);
 
@@ -50,12 +45,6 @@ function App() {
     formdata.append('category_name', category_name);
     formdata.append('public_status', public_status);
 
-    for (let item of formdata.values()) {
-      console.log(item);
-    }
-    for (let item of formdata.keys()) {
-      console.log(item);
-    }
     setCardData(formdata);
   }
 
