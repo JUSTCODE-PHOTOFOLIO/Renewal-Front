@@ -246,9 +246,10 @@ const CardDetailPage = () => {
           </div>
           {/* 태그 컴포넌트 */}
           <div className="detail-tag-wrapper">
-            {tags.map((tag, index) => {
-              return <Tag key={index} tag_name={tag.tag_name} />;
-            })}
+            {tags &&
+              tags.map((tag, index) => {
+                return <Tag key={index} tag_name={tag.tag_name} />;
+              })}
           </div>
           <div className="detail-copy-right">
             Copyright © {cardDetailContents.kor_name} All Rights Reserved.
