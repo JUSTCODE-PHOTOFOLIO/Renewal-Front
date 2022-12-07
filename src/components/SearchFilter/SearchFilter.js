@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 import css from './SearchFilter.module.scss';
 
 const SearchFilter = ({ URI }) => {
@@ -13,9 +13,30 @@ const SearchFilter = ({ URI }) => {
 
   const [countIndex, setCountIndex] = useState(9);
 
-  const handleOnClick = (e, idx) => {
+  const [newUrl, setNewUrl] = useState('');
+
+  const [nowUrl, setNowUrl] = useState(window.location.href);
+
+  //선택한 메뉴 id값
+  const [selectMenuNum, setSelectMenuNum] = useState(window.location.href);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  console.log('현재url : ', nowUrl);
+  // useEffect(() => {
+  //   if (selectMenuNum === 10) {
+  //     navigate('http://' + URI + ':8000/searchlist' + location.search);
+  //   } else {
+  //     navigate(newUrl);
+  //   }
+  // }, [nowUrl]);
+
+  const handleOnClick = (e, idx, id) => {
     setSelectMenu(e.target.innerText);
     setCountIndex(idx);
+    setSelectMenuNum(id);
+    setNewUrl(nowUrl + '&category_id=' + selectMenuNum);
+    setNowUrl(window.location.href);
   };
 
   //카테고리 배열
@@ -61,7 +82,7 @@ const SearchFilter = ({ URI }) => {
                 <li
                   key={menuList.id}
                   className={countIndex === idx ? `${css.on}` : undefined}
-                  onClick={e => handleOnClick(e, idx)}
+                  onClick={e => handleOnClick(e, idx, menuList.id)}
                 >
                   {menuList.category_name}
                 </li>
