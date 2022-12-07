@@ -61,8 +61,7 @@ function Header({ pathname }) {
   const nowContent = useRef();
   const goToSearhPage = e => {
     if (e.key === 'Enter') {
-      let url = '/searchlist?query=' + content;
-      navigate(url);
+      navigate('/searchlist?query=' + content, { state: { content } });
     } else {
       setContent(nowContent.current.value);
     }

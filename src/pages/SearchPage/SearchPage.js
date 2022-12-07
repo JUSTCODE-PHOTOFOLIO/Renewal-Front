@@ -5,6 +5,7 @@ import CardList from '../../components/Artwork/CardList';
 import Footer from '../../components/Footer/Footer';
 import './SearchPage.scss';
 const SearchPage = () => {
+  let location = useLocation();
   const [searchResult, setSearchResult] = useState([]);
   const [resultCount, setResultCount] = useState([]);
   const [content, setContent] = useState('');
@@ -14,7 +15,7 @@ const SearchPage = () => {
   const [isToggleBtnOn, setIsToggleBtnOn] = useState(false);
   const [selectMenu, setSelectMenu] = useState('분야전체');
   const [countIndex, setCountIndex] = useState(9);
-  let location = useLocation();
+
   let params = new URLSearchParams(location.search); //?query=구름
   let query = params.get('query');
   const URI = process.env.REACT_APP_BASE_URL;
@@ -42,7 +43,7 @@ const SearchPage = () => {
       navigate(
         '/searchlist?query=' + content + '&category_name=' + selectMenuNum
       );
-    } else if (selectMenuNum === 10) {
+    } else if (!location.state && selectMenuNum === 10) {
       navigate('/searchlist?query=' + content);
     }
   }, [selectMenuNum]);
@@ -70,7 +71,6 @@ const SearchPage = () => {
     if (e.key === 'Enter') {
       let url = '/searchlist?query=' + content;
       navigate(url);
-      // window.location.reload();
     } else {
       setContent(e.target.value);
     }
