@@ -1,7 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
-import SearchFilter from '../../components/SearchFilter/SearchFilter';
 import CardList from '../../components/Artwork/CardList';
 import Footer from '../../components/Footer/Footer';
 import './SearchPage.scss';
@@ -9,6 +8,14 @@ const SearchPage = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [resultCount, setResultCount] = useState([]);
   const [content, setContent] = useState('');
+  //true면 토글 메뉴 열기
+  const [isToggleOpen, setIsToggleOpen] = useState(false);
+  //true면 토글버튼 이미지 toggleUp
+  const [isToggleBtnOn, setIsToggleBtnOn] = useState(false);
+  const [selectMenu, setSelectMenu] = useState('분야전체');
+  const [countIndex, setCountIndex] = useState(9);
+  const [newUrl, setNewUrl] = useState('');
+  const [nowUrl, setNowUrl] = useState(window.location.href);
   let location = useLocation();
   let params = new URLSearchParams(location.search); //?query=구름
   let query = params.get('query');
@@ -22,10 +29,36 @@ const SearchPage = () => {
   //   setContent('');
   // };
 
-  //url에서
+  //검색 필터링 로직
+  //선택한 메뉴 id값
+  const [selectMenuNum, setSelectMenuNum] = useState(window.location.href);
+  console.log('현재url : ', nowUrl);
+
+  const handleOnClick = (e, idx, id) => {
+    setSelectMenu(e.target.innerText);
+    setCountIndex(idx);
+    setSelectMenuNum(id);
+    setNewUrl(nowUrl + '&category_id=' + selectMenuNum);
+    setNowUrl(window.location.href);
+  };
+
+  //카테고리 배열
+  const [categories, setCategories] = useState([]);
+
   useEffect(() => {
-    setContent(query);
-  }, [query]);
+    fetch('http://' + URI + ':8000/works')
+      .then(res => res.json())
+      .then(json => {
+        setCategories(json.categorySortCountList);
+      });
+  }, []);
+
+  const menuListArr = [...categories, { id: 10, category_name: '분야전체' }];
+
+  const handleToggleOpen = () => {
+    setIsToggleOpen(!isToggleOpen);
+    setIsToggleBtnOn(!isToggleBtnOn);
+  };
 
   //엔터키 눌렀을 때 검색페이지로 재 이동(url의 쿼리파라미터 변경)
   const search = e => {
@@ -70,7 +103,39 @@ const SearchPage = () => {
             onClick={resetInput}
           /> */}
         </div>
-        <SearchFilter URI={URI} />
+        <div className="filterContainer">
+          <div className="filterLists">
+            <div className="filterList">
+              <button
+                className={
+                  isToggleBtnOn ? 'filterListBtnOn' : 'filterListBtnOff'
+                }
+                onClick={handleToggleOpen}
+              >
+                {selectMenu}
+              </button>
+              <ul
+                className={
+                  isToggleOpen
+                    ? 'filterListMenu toggleListOn'
+                    : 'filterListMenu'
+                }
+              >
+                {menuListArr.map((menuList, idx) => {
+                  return (
+                    <li
+                      key={menuList.id}
+                      className={countIndex === idx ? 'on' : undefined}
+                      onClick={e => handleOnClick(e, idx, menuList.id)}
+                    >
+                      {menuList.category_name}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="count">
         <span>작품 검색 결과: </span>
