@@ -13,6 +13,18 @@ function App() {
   const navigate = useNavigate();
   const URI = process.env.REACT_APP_BASE_URL;
 
+  const categoryList = [
+    '패션',
+    '패턴&질감',
+    '여행',
+    '동물',
+    '애니메이션',
+    '디자인',
+    '조소/공예',
+    '사운드',
+    '헬로! 아티스트',
+  ];
+
   function moveCategory(event) {
     if (event.target.innerText === '패션')
       window.location.href = 'http://' + URI + ':3000/category/fashion';
@@ -65,33 +77,13 @@ function App() {
       </div>
       {categorySelect && (
         <div className="categorySelectDiv">
-          <div className="categoryChild" onClick={moveCategory}>
-            패션
-          </div>
-          <div className="categoryChild" onClick={moveCategory}>
-            패턴&질감
-          </div>
-          <div className="categoryChild" onClick={moveCategory}>
-            여행
-          </div>
-          <div className="categoryChild" onClick={moveCategory}>
-            동물
-          </div>
-          <div className="categoryChild" onClick={moveCategory}>
-            애니메이션
-          </div>
-          <div className="categoryChild" onClick={moveCategory}>
-            디자인
-          </div>
-          <div className="categoryChild" onClick={moveCategory}>
-            조소/공예
-          </div>
-          <div className="categoryChild" onClick={moveCategory}>
-            사운드
-          </div>
-          <div className="categoryChild" onClick={moveCategory}>
-            헬로! 아티스트
-          </div>
+          {categoryList.map((elem, idx) => {
+            return (
+              <div className="categoryChild" key={idx} onClick={moveCategory}>
+                {elem}
+              </div>
+            );
+          })}
         </div>
       )}
       <CardList URI={URI} />

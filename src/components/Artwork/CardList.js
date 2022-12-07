@@ -24,7 +24,6 @@ function CardList({ filter, URI }) {
       })
         .then(res => res.json())
         .then(data => {
-          console.log(data);
           setData(data.feedsList);
         });
     } else if (location.pathname === '/searchlist') {
