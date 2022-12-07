@@ -14,8 +14,6 @@ const SearchPage = () => {
   const [isToggleBtnOn, setIsToggleBtnOn] = useState(false);
   const [selectMenu, setSelectMenu] = useState('분야전체');
   const [countIndex, setCountIndex] = useState(9);
-  const [newUrl, setNewUrl] = useState('');
-  const [nowUrl, setNowUrl] = useState(window.location.href);
   let location = useLocation();
   let params = new URLSearchParams(location.search); //?query=구름
   let query = params.get('query');
@@ -31,16 +29,25 @@ const SearchPage = () => {
 
   //검색 필터링 로직
   //선택한 메뉴 id값
-  const [selectMenuNum, setSelectMenuNum] = useState(window.location.href);
-  console.log('현재url : ', nowUrl);
+  const [selectMenuNum, setSelectMenuNum] = useState(10);
 
   const handleOnClick = (e, idx, id) => {
     setSelectMenu(e.target.innerText);
     setCountIndex(idx);
     setSelectMenuNum(id);
-    setNewUrl(nowUrl + '&category_id=' + selectMenuNum);
-    setNowUrl(window.location.href);
+    setIsToggleOpen(false);
   };
+
+  console.log(selectMenuNum);
+  useEffect(() => {
+    if (selectMenuNum !== 10) {
+      navigate(
+        '/searchlist?query=' + content + '&category_name=' + selectMenuNum
+      );
+    } else if (selectMenuNum === 10) {
+      navigate('/searchlist?query=' + content);
+    }
+  }, [selectMenuNum]);
 
   //카테고리 배열
   const [categories, setCategories] = useState([]);
@@ -65,7 +72,7 @@ const SearchPage = () => {
     if (e.key === 'Enter') {
       let url = '/searchlist?query=' + content;
       navigate(url);
-      window.location.reload();
+      // window.location.reload();
     } else {
       setContent(e.target.value);
     }
@@ -77,10 +84,12 @@ const SearchPage = () => {
     fetch('http://' + URI + ':8000/searchlist' + location.search)
       .then(res => res.json())
       .then(json => {
-        setResultCount(json.searchResultCount[0].result_cnt);
+        setResultCount(json.resultCount[0].result_cnt);
         setSearchResult(json.searchResult);
       });
-  }, []);
+  }, [window.location.href]);
+
+  console.log('resultCount : ', resultCount);
 
   return (
     <Fragment>
