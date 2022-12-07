@@ -37,8 +37,6 @@ const SearchPage = () => {
     setSelectMenuNum(id);
     setIsToggleOpen(false);
   };
-
-  console.log(selectMenuNum);
   useEffect(() => {
     if (selectMenuNum !== 10) {
       navigate(
@@ -88,8 +86,6 @@ const SearchPage = () => {
         setSearchResult(json.searchResult);
       });
   }, [window.location.href]);
-
-  console.log('resultCount : ', resultCount);
 
   return (
     <Fragment>
