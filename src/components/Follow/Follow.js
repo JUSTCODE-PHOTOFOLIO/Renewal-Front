@@ -1,23 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import css from './Follow.module.scss';
-import Login from '../Login/Login';
-import Join from '../Join/Join';
 import { useParams } from 'react-router-dom';
 
 const Follow = ({ type, writerInfo, URI }) => {
   const [isFollow, setIsFollow] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  //login창 로직 추가 코드
-  const [openLoginpage, setOpenLoginPage] = useState(false);
-  const [openJoinPage, setJoinPage] = useState(false);
-  function closeLoginpage() {
-    setOpenLoginPage(false);
-  }
-
   function clickLoginBtn() {
     alert('로그인한 다음 이용해 주세요.');
-    setOpenLoginPage(true);
+    !localStorage.getItem('token') &&
+      document.querySelector('#replaceLogin').click();
   }
 
   //로그인 여부 확인
@@ -153,16 +145,6 @@ const Follow = ({ type, writerInfo, URI }) => {
   };
   return (
     <div className={css.followBtns}>
-      {/* login창 로직 추가 코드 */}
-      {openLoginpage && (
-        <Login
-          closeLoginpage={closeLoginpage}
-          setJoinPage={setJoinPage}
-          setOpenLoginPage={setOpenLoginPage}
-        />
-      )}
-      {openJoinPage && <Join setJoinPage={setJoinPage} />}
-      {/* login창 로직 추가 코드 종료*/}
       {type === 'short' ? checkShortFollow() : checkLongFollow()}
     </div>
   );

@@ -47,6 +47,7 @@ const Router = () => {
         <Route path="/works/:id" element={<CardDetailPage />} />
         <Route path="/searchList" element={<SearchPage />} />
         <Route path="/category/:id" element={<Category />} />
+        <Route path="/test" element={<CardDetailPage />} />
       </Routes>
     </BrowserRouter>
   );
