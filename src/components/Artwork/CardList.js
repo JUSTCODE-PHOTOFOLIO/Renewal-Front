@@ -19,7 +19,6 @@ function CardList({ filter, URI, testState }) {
         });
       return;
     } else if (location.search === '?sort=recommendpoint') {
-      console.log('test1');
       fetch('http://' + URI + ':8000/works?sort=recommendpoint', {
         headers: {
           'Content-Type': 'application/json',
@@ -27,11 +26,10 @@ function CardList({ filter, URI, testState }) {
       })
         .then(res => res.json())
         .then(data => {
-          setData(data.feedsList);
+          setData(data.worksFeedList);
         });
       return;
     } else if (location.search === '?sort=sympathycnt') {
-      console.log('test2');
       fetch('http://' + URI + ':8000/works?sort=sympathycnt', {
         headers: {
           'Content-Type': 'application/json',
@@ -39,7 +37,7 @@ function CardList({ filter, URI, testState }) {
       })
         .then(res => res.json())
         .then(data => {
-          setData(data.feedsList);
+          setData(data.worksFeedList);
         });
       return;
     } else if (location.pathname === '/feeds') {
