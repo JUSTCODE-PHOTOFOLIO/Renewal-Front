@@ -70,6 +70,7 @@ const SearchPage = () => {
   const search = e => {
     if (e.key === 'Enter') {
       let url = '/searchlist?query=' + content;
+      setIsToggleOpen(false);
       navigate(url);
     } else {
       setContent(e.target.value);
