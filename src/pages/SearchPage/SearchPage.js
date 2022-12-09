@@ -23,11 +23,6 @@ const SearchPage = () => {
   //검색창 로직
   const navigate = useNavigate();
 
-  //x버튼 클릭 시 input내용 reset
-  // const resetInput = e => {
-  //   setContent('');
-  // };
-
   //검색 필터링 로직
   //선택한 메뉴 id값
   const [selectMenuNum, setSelectMenuNum] = useState(10);
@@ -102,12 +97,6 @@ const SearchPage = () => {
             defaultValue={content}
             type="search"
           />
-          {/* <button
-            className={
-              query === content ? 'inputResetBtn' : 'inputResetBtn blind'
-            }
-            onClick={resetInput}
-          /> */}
         </div>
         <div className="filterContainer">
           <div className="filterLists">
