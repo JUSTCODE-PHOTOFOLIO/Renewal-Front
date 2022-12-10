@@ -7,6 +7,12 @@
   position: relative;
   margin: 0 auto;
 
+  .previewImg {
+    width: 896px;
+    object-fit: contain;
+    cursor: pointer;
+  }
+
   .uploadWriteTitle {
     width: 896px;
     border: none;
@@ -26,7 +32,7 @@
 
   .uploadWriteContent {
     width: 896px;
-    height: 500px;
+    height: 250px;
     margin: 20px 10px;
     border: none;
 

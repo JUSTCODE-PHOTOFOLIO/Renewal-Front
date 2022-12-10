@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './login.scss';
 
-function Login({ closeLoginpage, setJoinPage, setOpenLoginPage }) {
+function Login({ closeLoginpage, setJoinPage, setOpenLoginPage, URI }) {
   const [resObj, setResObj] = useState({});
 
   const id = useRef();
@@ -23,7 +23,7 @@ function Login({ closeLoginpage, setJoinPage, setOpenLoginPage }) {
 
   useEffect(() => {
     if (resObj.login_id) {
-      fetch('http://43.201.0.95:8000/user/login', {
+      fetch('http://' + URI + ':8000/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json', // 헤더 없으면 에러남
@@ -32,13 +32,17 @@ function Login({ closeLoginpage, setJoinPage, setOpenLoginPage }) {
       })
         .then(res => res.json())
         .then(res => {
+          if (res.message === '회원가입 내역이 없으시네요.')
+            return alert(res.message);
+          if (res.message === '비밀번호가 다릅니다.') return alert(res.message);
+
           if (res.token !== undefined) {
             localStorage.setItem('token', res.token);
             localStorage.setItem('profile_image', res.profile);
             localStorage.setItem('id', res.id);
             localStorage.setItem('kor_name', res.name);
           }
-          if (res.token) window.location.href = 'http://43.201.0.95:3000/works';
+          if (res.token) window.location.href = 'http://' + URI + ':3000/works';
         });
     }
   }, [resObj]);

@@ -31,12 +31,7 @@ function App({ updateTagMockDataFunc, tagFieldRef }) {
       <div className="tagField" ref={tagFieldRef}>
         {tagMockData.map((elem, idx) => {
           return (
-            <div
-              key={idx}
-              style={{}}
-              onClick={clickTag}
-              className="uploadModalTag"
-            >
+            <div key={idx} onClick={clickTag} className="uploadModalTag">
               {elem}
             </div>
           );

@@ -10,12 +10,11 @@ function App({
   setCategory_name,
   setPublic_status,
   startFetch,
+  previewImg,
 }) {
-  const [tagModalState, setTagModalState] = useState(false); // 태그 추가창 열고 닫기
-  const [uploadModalState, setuploadModalState] = useState(false); // ㄹ
+  const [tagModalState, setTagModalState] = useState(false);
+  const [uploadModalState, setuploadModalState] = useState(false);
   const [uploadTagData, setUploadTagData] = useState([]);
-
-  const [previewState, setPreviewState] = useState(false);
 
   const titleValue = useRef();
   const contentValue = useRef();
@@ -30,7 +29,6 @@ function App({
     const updateTagMockData = [];
     if (tagFieldRef.current) {
       tagFieldRef.current.childNodes.forEach(element => {
-        // 고차함수 사용이 안돼서 forEach를 사용했던 것 같다
         updateTagMockData.push(element.innerText);
       });
     }
@@ -38,8 +36,11 @@ function App({
   }
 
   function addTag(event) {
-    if (tagModalState) setTagModalState(false);
-    if (!tagModalState) setTagModalState(true);
+    setTagModalState(!tagModalState);
+  }
+
+  function clickPreveiw() {
+    document.querySelector('.uploadWriteContent').focus();
   }
 
   useEffect(() => {
@@ -62,7 +63,7 @@ function App({
         ></input>
         <div className="divide"></div>
 
-        {previewState && <div></div>}
+        <img src={previewImg} className="previewImg" onClick={clickPreveiw} />
         <textarea
           ref={contentValue}
           name="content"

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './join.scss';
 
-function Join({ setJoinPage }) {
+function Join({ setJoinPage, URI }) {
   const [userData, setUserData] = useState();
   const [files, setFiles] = useState();
 
@@ -58,7 +58,7 @@ function Join({ setJoinPage }) {
       userEmail.current.value &&
       files[0]
     ) {
-      fetch('http://43.201.0.95:8000/user/signup', {
+      fetch('http://' + URI + ':8000/user/signup', {
         method: 'POST',
         headers: {
           // 'Content-Type': 'multipart/form-data', // 헤더 없으면 에러남
@@ -67,9 +67,6 @@ function Join({ setJoinPage }) {
       })
         .then(res => res.json())
         .then(res => {
-          console.log(res.message);
-          console.log(typeof res.message);
-
           setIdAlert();
           setPwAlert();
           setPwCheckAlert();
@@ -80,7 +77,7 @@ function Join({ setJoinPage }) {
 
           if (res.message === '회원가입 되었습니다.') {
             localStorage.clear();
-            window.location.href = 'http://43.201.0.95:3000/works';
+            window.location.href = 'http://' + URI + ':3000/works';
           }
 
           if (res.message === '아이디를 4자리 ~ 12자리 이내로 입력해주세요.') {
@@ -237,7 +234,6 @@ function Join({ setJoinPage }) {
             name="file"
             accept="img/*"
             onChange={onLoadFile}
-            // multiple
           ></input>
 
           <button className="loginBtn" onClick={clickJoin}>

@@ -1,0 +1,42 @@
+.categoryModal {
+  border: solid rgba(70, 68, 68, 0.752) 1px;
+  width: 378px;
+  height: 110px;
+  z-index: 3;
+  background-color: white;
+  display: flex;
+  position: absolute;
+
+  .leftRadio {
+    display: flex;
+    flex-direction: column;
+    width: 179px;
+
+    label {
+      font-size: 13px;
+      color: rgba(128, 128, 128, 0.826);
+      input {
+        margin: 5px;
+        width: 11px;
+        height: 11px;
+      }
+    }
+  }
+
+  .rightRadio {
+    display: flex;
+    flex-direction: column;
+    width: 179px;
+
+    label {
+      font-size: 13px;
+      color: rgba(128, 128, 128, 0.826);
+
+      input {
+        margin: 5px;
+        width: 11px;
+        height: 11px;
+      }
+    }
+  }
+}

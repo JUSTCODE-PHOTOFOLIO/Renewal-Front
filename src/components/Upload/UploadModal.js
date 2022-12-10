@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './uploadModal.scss';
-import CategoryModal from './CategoryModal';
+import CategoryModal from '../../components/Upload/CategoryModal';
 
 function App({
   setuploadModalState,
@@ -9,6 +9,8 @@ function App({
   startFetch,
 }) {
   const [categoryState, setCategoryState] = useState(false);
+  const [modalAlretSpanValue, setModalAlretSpanValue] =
+    useState('작품 분야를 선택해 주세요.');
 
   function clickCencleBtn(event) {
     event.preventDefault();
@@ -34,21 +36,28 @@ function App({
         <div className="ModalSelectDiv">
           <div className="categorySelect">
             <span className="ModalSelectDivName">분야</span>
-            <div className="modalOpenBox" onClick={clickCategoryModal}></div>
+            <div className="modalOpenBox" onClick={clickCategoryModal}>
+              <span>{modalAlretSpanValue}</span>
+            </div>
             {categoryState && (
               <CategoryModal
                 setCategoryState={setCategoryState}
                 setCategory_name={setCategory_name}
+                setModalAlretSpanValue={setModalAlretSpanValue}
               />
             )}
           </div>
           <div className="colabolateSelect">
             <span className="ModalSelectDivName">콜라보레이션(선택)</span>
-            <div className="modalOpenBox"></div>
+            <div className="modalOpenBox">
+              <span>참여하지 않음.</span>
+            </div>
           </div>
           <div className="lisenceSelect">
             <span className="ModalSelectDivName">CC라이선스</span>
-            <div className="modalOpenBox"></div>
+            <div className="modalOpenBox">
+              <span>Copyright © All Rights Reserved</span>
+            </div>
           </div>
         </div>
         <div className="radioSelectDiv">

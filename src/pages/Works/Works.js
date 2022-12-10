@@ -5,11 +5,12 @@ import Footer from '../../components/Footer/Footer';
 import Artwork from '../../components/Artwork/Artwork';
 
 const Work = () => {
+  const URI = process.env.REACT_APP_BASE_URL;
   return (
     <Fragment>
-      <Header />
-      <CategoryCarousel />
-      <Artwork />
+      <Header URI={URI} />
+      <CategoryCarousel URI={URI} />
+      <Artwork URI={URI} />
       <Footer />
     </Fragment>
   );

@@ -3,8 +3,11 @@ import ArtworkFilter from './ArtworkFilter';
 import CardList from './CardList';
 import './artwork.scss';
 
-function Artwork() {
+function Artwork({ URI }) {
   const [filter, setFilter] = useState(1);
+  const filterArr = ['최신', '추천순', '공감순'];
+  let filterCounter = 1;
+
   return (
     <>
       <div className="artwork">
@@ -14,40 +17,19 @@ function Artwork() {
         >
           Artwork
         </h2>
-        <div style={{ cursor: 'pointer' }}>
-          <ArtworkFilter
-            curr={1}
-            setFilter={setFilter}
-            filter={filter}
-            name={'최신'}
-          />
-        </div>
-        <div style={{ cursor: 'pointer' }}>
-          <ArtworkFilter
-            curr={2}
-            setFilter={setFilter}
-            filter={filter}
-            name={'주목받는'}
-          />
-        </div>
-        <div style={{ cursor: 'pointer' }}>
-          <ArtworkFilter
-            curr={3}
-            setFilter={setFilter}
-            filter={filter}
-            name={'데뷰'}
-          />
-        </div>
-        <div style={{ cursor: 'pointer' }}>
-          <ArtworkFilter
-            curr={4}
-            setFilter={setFilter}
-            filter={filter}
-            name={'발견'}
-          />
-        </div>
+        {filterArr.map(elem => {
+          return (
+            <ArtworkFilter
+              key={filterCounter}
+              curr={filterCounter++}
+              setFilter={setFilter}
+              filter={filter}
+              name={elem}
+            />
+          );
+        })}
       </div>
-      <CardList filter={filter} />
+      <CardList filter={filter} URI={URI} />
     </>
   );
 }

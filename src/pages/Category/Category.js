@@ -11,26 +11,39 @@ function App() {
   const [categorySelect, setCategorySelect] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
+  const URI = process.env.REACT_APP_BASE_URL;
+
+  const categoryList = [
+    '패션',
+    '패턴&질감',
+    '여행',
+    '동물',
+    '애니메이션',
+    '디자인',
+    '조소/공예',
+    '사운드',
+    '헬로! 아티스트',
+  ];
 
   function moveCategory(event) {
     if (event.target.innerText === '패션')
-      window.location.href = 'http://43.201.0.95:3000/category/fashion';
+      window.location.href = 'http://' + URI + ':3000/category/fashion';
     if (event.target.innerText === '패턴&질감')
-      window.location.href = 'http://43.201.0.95:3000/category/pattern';
+      window.location.href = 'http://' + URI + ':3000/category/pattern';
     if (event.target.innerText === '여행')
-      window.location.href = 'http://43.201.0.95:3000/category/travel';
+      window.location.href = 'http://' + URI + ':3000/category/travel';
     if (event.target.innerText === '동물')
-      window.location.href = 'http://43.201.0.95:3000/category/animal';
+      window.location.href = 'http://' + URI + ':3000/category/animal';
     if (event.target.innerText === '애니메이션')
-      window.location.href = 'http://43.201.0.95:3000/category/animation';
+      window.location.href = 'http://' + URI + ':3000/category/animation';
     if (event.target.innerText === '디자인')
-      window.location.href = 'http://43.201.0.95:3000/category/design';
+      window.location.href = 'http://' + URI + ':3000/category/design';
     if (event.target.innerText === '조소/공예')
-      window.location.href = 'http://43.201.0.95:3000/category/craft';
+      window.location.href = 'http://' + URI + ':3000/category/craft';
     if (event.target.innerText === '사운드')
-      window.location.href = 'http://43.201.0.95:3000/category/sound';
+      window.location.href = 'http://' + URI + ':3000/category/sound';
     if (event.target.innerText === '헬로! 아티스트')
-      window.location.href = 'http://43.201.0.95:3000/category/helloartist';
+      window.location.href = 'http://' + URI + ':3000/category/helloartist';
   }
 
   function clickCategory(event) {
@@ -50,52 +63,32 @@ function App() {
     if (params.id === 'helloartist') setCategory('헬로! 아티스트');
   }, []);
 
-  useEffect(() => {
-    console.log(category);
-  }, [category]);
-
   return (
-    <div>
+    <>
       <Header />
-      <div className="categoryComponent">
-        <div className="categoryName" onClick={clickCategory}>
-          {category} ▼
+      <div className={`categoryComponent ${params.id}Img`}>
+        <div className="mosaicDiv">
+          <div className={`insideComponent ${params.id}Img`}>
+            <div className="categoryName" onClick={clickCategory}>
+              {category} ▼
+            </div>
+          </div>
         </div>
       </div>
       {categorySelect && (
         <div className="categorySelectDiv">
-          <div className="categoryChild" onClick={moveCategory}>
-            패션
-          </div>
-          <div className="categoryChild" onClick={moveCategory}>
-            패턴&질감
-          </div>
-          <div className="categoryChild" onClick={moveCategory}>
-            여행
-          </div>
-          <div className="categoryChild" onClick={moveCategory}>
-            동물
-          </div>
-          <div className="categoryChild" onClick={moveCategory}>
-            애니메이션
-          </div>
-          <div className="categoryChild" onClick={moveCategory}>
-            디자인
-          </div>
-          <div className="categoryChild" onClick={moveCategory}>
-            조소/공예
-          </div>
-          <div className="categoryChild" onClick={moveCategory}>
-            사운드
-          </div>
-          <div className="categoryChild" onClick={moveCategory}>
-            헬로! 아티스트
-          </div>
+          {categoryList.map((elem, idx) => {
+            return (
+              <div className="categoryChild" key={idx} onClick={moveCategory}>
+                {elem}
+              </div>
+            );
+          })}
         </div>
       )}
-      <CardList />
+      <CardList URI={URI} />
       <Footer />
-    </div>
+    </>
   );
 }
 
