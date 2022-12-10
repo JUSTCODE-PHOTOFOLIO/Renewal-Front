@@ -2,8 +2,6 @@ import React, { Fragment, useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import Login from '../../components/Login/Login';
-import Join from '../../components/Join/Join';
 import Tag from '../../components/CardDetailContent/Tag/Tag';
 import Reply from '../../components/CardDetailContent/Reply/Reply';
 import CardDetailCarousel from '../../components/CardDetailCarousel/CardDetailCarousel';
@@ -79,16 +77,11 @@ const CardDetailPage = () => {
 
   const navigate = useNavigate();
 
-  //login 모달창 열기
-  const [openLoginpage, setOpenLoginPage] = useState(false);
-  const [openJoinPage, setJoinPage] = useState(false);
-  function closeLoginpage() {
-    setOpenLoginPage(false);
-  }
   //로그인하지 않았을 때 댓글창 누르면, 메인으로 이동
   const openLoginModal = e => {
     alert('로그인한 다음 이용해 주세요.');
-    setOpenLoginPage(true);
+    !localStorage.getItem('token') &&
+      document.querySelector('#replaceLogin').click();
   };
 
   const [menuBtn, setMenuBtn] = useState(false); //메뉴버튼 클릭 상태
@@ -117,7 +110,8 @@ const CardDetailPage = () => {
 
   function floatLoginModal() {
     alert('로그인한 다음 이용해 주세요.');
-    setOpenLoginPage(true);
+    !localStorage.getItem('token') &&
+      document.querySelector('#replaceLogin').click();
   }
 
   //좋아요 버튼을 누르면
@@ -192,15 +186,6 @@ const CardDetailPage = () => {
     <Fragment>
       <Header />
       <div className="detail-out-wrapper">
-        {/* login 모달창 로직 추가 코드 */}
-        {openLoginpage && (
-          <Login
-            closeLoginpage={closeLoginpage}
-            setJoinPage={setJoinPage}
-            setOpenLoginPage={setOpenLoginPage}
-          />
-        )}
-        {openJoinPage && <Join setJoinPage={setJoinPage} />}
         <div className="detail-header-wrapper">
           <div className="detail-title-wrapper">
             <h3 className="detail-title">{cardDetailContents.title}</h3>

@@ -138,7 +138,11 @@ function Header({ pathname }) {
           )}
 
           {isLogin === false ? (
-            <button className={css.headerBtn} onClick={clickLoginBtn}>
+            <button
+              id="replaceLogin"
+              className={css.headerBtn}
+              onClick={clickLoginBtn}
+            >
               로그인
             </button>
           ) : (
