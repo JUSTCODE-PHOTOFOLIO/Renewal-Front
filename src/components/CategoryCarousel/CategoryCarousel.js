@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CategoryCarousel.scss';
 
-const CategoryCarousel = ({ URI, PORT }) => {
+const CategoryCarousel = ({ BACK_URI, PORT }) => {
   const [categories, setCategories] = useState([]);
 
   //hover 여부 확인
@@ -14,7 +14,7 @@ const CategoryCarousel = ({ URI, PORT }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://' + URI + ':' + PORT + '/works')
+    fetch('http://' + BACK_URI + ':' + PORT + '/works')
       .then(res => res.json())
       .then(json => {
         setCategories(json.categorySortCountList);

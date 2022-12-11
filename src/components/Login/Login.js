@@ -1,7 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './login.scss';
 
-function Login({ closeLoginpage, setJoinPage, setOpenLoginPage, URI, PORT }) {
+function Login({
+  closeLoginpage,
+  setJoinPage,
+  setOpenLoginPage,
+  FRONT_URI,
+  BACK_URI,
+  PORT,
+}) {
   const [resObj, setResObj] = useState({});
 
   const id = useRef();
@@ -23,7 +30,7 @@ function Login({ closeLoginpage, setJoinPage, setOpenLoginPage, URI, PORT }) {
 
   useEffect(() => {
     if (resObj.login_id) {
-      fetch('http://' + URI + ':' + PORT + '/user/login', {
+      fetch('http://' + BACK_URI + ':' + PORT + '/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json', // 헤더 없으면 에러남
@@ -42,7 +49,8 @@ function Login({ closeLoginpage, setJoinPage, setOpenLoginPage, URI, PORT }) {
             localStorage.setItem('id', res.id);
             localStorage.setItem('kor_name', res.name);
           }
-          if (res.token) window.location.href = 'http://' + URI + ':3000/works';
+          if (res.token)
+            window.location.href = 'http://' + FRONT_URI + ':3000/works';
         });
     }
   }, [resObj]);

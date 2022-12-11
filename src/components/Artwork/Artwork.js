@@ -3,7 +3,7 @@ import ArtworkFilter from './ArtworkFilter';
 import CardList from './CardList';
 import './artwork.scss';
 
-function Artwork({ URI, PORT }) {
+function Artwork({ BACK_URI, PORT }) {
   const [filter, setFilter] = useState(1);
   const filterArr = ['최신', '추천순', '공감순'];
   let filterCounter = 1;
@@ -29,7 +29,7 @@ function Artwork({ URI, PORT }) {
           );
         })}
       </div>
-      <CardList filter={filter} URI={URI} PORT={PORT} />
+      <CardList filter={filter} BACK_URI={BACK_URI} PORT={PORT} />
     </>
   );
 }

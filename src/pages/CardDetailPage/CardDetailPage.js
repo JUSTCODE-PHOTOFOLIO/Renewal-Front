@@ -9,7 +9,7 @@ import CardList from '../../components/Artwork/CardList';
 import './CardDetailPage.scss';
 
 const CardDetailPage = () => {
-  const URI = process.env.REACT_APP_BASE_URL;
+  const BACK_URI = process.env.REACT_APP_BASE_BACK_URL;
   const PORT = process.env.REACT_APP_BACK_DEFAULT_PORT;
   const [cardDetailContents, setcardDetailContents] = useState([]);
   const [tags, setTags] = useState([]); //태그
@@ -26,7 +26,7 @@ const CardDetailPage = () => {
 
   //카드 상세페이지 정보 fetch
   useEffect(() => {
-    fetch('http://' + URI + ':' + PORT + '/works/feed/' + id, {
+    fetch('http://' + BACK_URI + ':' + PORT + '/works/feed/' + id, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ const CardDetailPage = () => {
         setLikeCnt(res.sympathySortCount[0].sympathy_cnt);
       });
     //좋아요 버튼 상태
-    fetch('http://' + URI + ':' + PORT + '/sympathy/' + id, {
+    fetch('http://' + BACK_URI + ':' + PORT + '/sympathy/' + id, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: localStorage.getItem('token'),
@@ -63,7 +63,7 @@ const CardDetailPage = () => {
 
   //새로운 댓글 저장 fetch
   const saveReply = () => {
-    fetch('http://' + URI + ':' + PORT + '/comments', {
+    fetch('http://' + BACK_URI + ':' + PORT + '/comments', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ const CardDetailPage = () => {
     alert(
       `작품을 정말 삭제하시겠습니까?                                                 작품을 삭제하면 댓글 정보까지 영구히 삭제됩니다.`
     );
-    fetch('http://' + URI + ':' + PORT + '/works/feed/' + id, {
+    fetch('http://' + BACK_URI + ':' + PORT + '/works/feed/' + id, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ const CardDetailPage = () => {
   const clickLike = () => {
     // 좋아요 카운트 증가
     if (token && likeBtn === false) {
-      fetch('http://' + URI + ':' + PORT + '/sympathy', {
+      fetch('http://' + BACK_URI + ':' + PORT + '/sympathy', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -137,7 +137,7 @@ const CardDetailPage = () => {
         });
     } else if (token && likeBtn === true) {
       // 좋아요 카운트 감소
-      fetch('http://' + URI + ':' + PORT + '/sympathy', {
+      fetch('http://' + BACK_URI + ':' + PORT + '/sympathy', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -301,7 +301,7 @@ const CardDetailPage = () => {
                   kor_name={reply.kor_name}
                   comment={reply.comment}
                   created_at={reply.created_at}
-                  URI={URI}
+                  BACK_URI={BACK_URI}
                   posting_id={cardDetailContents.id}
                   PORT={PORT}
                 />
@@ -311,13 +311,13 @@ const CardDetailPage = () => {
         </details>
       </div>
       <CardDetailCarousel
-        URI={URI}
+        BACK_URI={BACK_URI}
         info={info}
         works={works}
         writerInfo={writerInfo}
         PORT={PORT}
       />
-      <CardList URI={URI} PORT={PORT} />
+      <CardList BACK_URI={BACK_URI} PORT={PORT} />
       <Footer />
     </Fragment>
   );

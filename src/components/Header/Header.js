@@ -8,7 +8,8 @@ function Header({ pathname }) {
   const id = localStorage.getItem('id');
   const location = useLocation();
   let nowPage = location.pathname;
-  const URI = process.env.REACT_APP_BASE_URL;
+  const FRONT_URI = process.env.REACT_APP_BASE_FRONT_URL;
+  const BACK_URI = process.env.REACT_APP_BASE_BACK_URL;
   const PORT = process.env.REACT_APP_BACK_DEFAULT_PORT;
 
   //로그인 여부 체크
@@ -79,7 +80,8 @@ function Header({ pathname }) {
             closeLoginpage={closeLoginpage}
             setJoinPage={setJoinPage}
             setOpenLoginPage={setOpenLoginPage}
-            URI={URI}
+            FRONT_URI={FRONT_URI}
+            BACK_URI={BACK_URI}
             PORT={PORT}
           />
         </div>
@@ -88,7 +90,12 @@ function Header({ pathname }) {
         <div
           style={{ boxShadow: 'rgba(0, 0, 0, 0.5) 0 0 0 9999px', zIndex: '3' }}
         >
-          <Join setJoinPage={setJoinPage} URI={URI} PORT={PORT} />
+          <Join
+            setJoinPage={setJoinPage}
+            FRONT_URI={FRONT_URI}
+            BACK_URI={BACK_URI}
+            PORT={PORT}
+          />
         </div>
       )}
       {/* login창 로직 추가 코드 종료*/}
@@ -188,7 +195,8 @@ function Header({ pathname }) {
                     <li
                       onClick={() => {
                         localStorage.clear();
-                        window.location.href = 'http://' + URI + ':3000/works';
+                        window.location.href =
+                          'http://' + FRONT_URI + ':3000/works';
                       }}
                     >
                       로그아웃

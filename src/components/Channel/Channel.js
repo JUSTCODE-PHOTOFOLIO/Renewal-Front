@@ -4,7 +4,7 @@ import ChanelCardList from '../Artwork/ChanelCardList/ChanelCardList';
 import Follow from '../Follow/Follow';
 import './Channel.scss';
 
-const Channel = ({ URI, PORT }) => {
+const Channel = ({ BACK_URI, PORT }) => {
   const [userInfo, setUserInfo] = useState([]); //유저정보
   const [postArray, setPostArray] = useState([]); //카드정보 데이터
   const [followingInfo, setFollowingInfo] = useState([]); //팔로잉정보 데이터
@@ -15,7 +15,7 @@ const Channel = ({ URI, PORT }) => {
 
   //데이터 fetch
   useEffect(() => {
-    fetch('http://' + URI + ':' + PORT + '/channel/' + params, {
+    fetch('http://' + BACK_URI + ':' + PORT + '/channel/' + params, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -58,7 +58,11 @@ const Channel = ({ URI, PORT }) => {
                     </Link>
                   </button>
                 ) : (
-                  <Follow URI={URI} writerInfo={userInfo} PORT={PORT} />
+                  <Follow
+                    BACK_URI={BACK_URI}
+                    writerInfo={userInfo}
+                    PORT={PORT}
+                  />
                 )}
               </div>
             </div>
@@ -87,7 +91,7 @@ const Channel = ({ URI, PORT }) => {
               </div>
               {postArray.length !== 0 ? (
                 <div className="feed-channel-feed-div">
-                  <ChanelCardList URI={URI} PORT={PORT} />
+                  <ChanelCardList BACK_URI={BACK_URI} PORT={PORT} />
                 </div>
               ) : id == userInfo.id ? (
                 <div className="feed-channel-feed-div channel-feed-text">

@@ -15,7 +15,8 @@ function App() {
   const [public_status, setPublic_status] = useState(null);
 
   const [cardData, setCardData] = useState(null);
-  const URI = process.env.REACT_APP_BASE_URL;
+  const Front_URI = process.env.REACT_APP_BASE_FRONT_URL;
+  const BACK_URI = process.env.REACT_APP_BASE_BACK_URL;
   const PORT = process.env.REACT_APP_BACK_DEFAULT_PORT;
 
   const [previewImg, setPreviewImg] = useState(null);
@@ -51,7 +52,7 @@ function App() {
 
   useEffect(() => {
     if (cardData !== null) {
-      fetch('http://' + URI + ':' + PORT + '/upload/form', {
+      fetch('http://' + BACK_URI + ':' + PORT + '/upload/form', {
         method: 'POST',
         headers: {
           Authorization: localStorage.getItem('token'),
@@ -62,7 +63,7 @@ function App() {
         .then(res => {
           console.log(res);
           if (res.message === '업로드 성공') {
-            window.location.href = 'http://' + URI + ':3000/feeds';
+            window.location.href = 'http://' + Front_URI + ':3000/feeds';
           }
         });
     }
@@ -70,7 +71,7 @@ function App() {
 
   return (
     <>
-      <Header URI={URI} PORT={PORT} />
+      <Header BACK_URI={BACK_URI} PORT={PORT} />
       {uploadCheck && <UploadMain onImgChange={onImgChange} />}
       {!uploadCheck && (
         <UploadWrite

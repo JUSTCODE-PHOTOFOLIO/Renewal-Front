@@ -13,7 +13,7 @@ import Category from './pages/Category/Category';
 
 const Router = () => {
   const [isLogin, setIsLogin] = useState(false);
-  const URI = process.env.REACT_APP_BASE_URL;
+  const FRONT_URI = process.env.REACT_APP_BASE_FRONT_URL;
   useEffect(() => {
     if (localStorage.getItem('token')) {
       setIsLogin(true);
@@ -23,15 +23,15 @@ const Router = () => {
   }, [isLogin]);
   //처음 접속 시 토큰 여부에 따라 시작 페이지 설정
   if (
-    (window.location.href === 'http://' + URI + ':3000/') &
-    (isLogin === false)
+    window.location.href === 'http://' + FRONT_URI + ':3000/' &&
+    isLogin === false
   ) {
-    window.location.href = 'http://' + URI + ':3000/works';
+    window.location.href = 'http://' + FRONT_URI + ':3000/works';
   } else if (
-    (window.location.href === 'http://' + URI + ':3000/') &
-    (isLogin === true)
+    window.location.href === 'http://' + FRONT_URI + ':3000/' &&
+    isLogin === true
   ) {
-    window.location.href = 'http://' + URI + ':3000/feeds';
+    window.location.href = 'http://' + FRONT_URI + ':3000/feeds';
   }
 
   return (

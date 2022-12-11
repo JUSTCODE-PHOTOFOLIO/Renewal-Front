@@ -8,7 +8,7 @@ const Reply = ({
   created_at,
   user_id,
   id,
-  URI,
+  BACK_URI,
   posting_id,
   PORT,
 }) => {
@@ -29,7 +29,7 @@ const Reply = ({
   //댓글 삭제 fetch
   const deleteReply = () => {
     alert('댓글을 삭제하시겠습니까?');
-    fetch('http://' + URI + ':' + PORT + '/comments', {
+    fetch('http://' + BACK_URI + ':' + PORT + '/comments', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
