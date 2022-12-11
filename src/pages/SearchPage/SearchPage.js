@@ -19,6 +19,7 @@ const SearchPage = () => {
   let params = new URLSearchParams(location.search); //?query=구름
   let query = params.get('query');
   const URI = process.env.REACT_APP_BASE_URL;
+  const PORT = process.env.REACT_APP_BACK_DEFAULT_PORT;
 
   //검색창 로직
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ const SearchPage = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch('http://' + URI + ':8000/works')
+    fetch('http://' + URI + ':' + PORT + '/works')
       .then(res => res.json())
       .then(json => {
         setCategories(json.categorySortCountList);
@@ -75,7 +76,7 @@ const SearchPage = () => {
   //검색 페이지 데이터 불러오기
   useEffect(() => {
     setContent(query);
-    fetch('http://' + URI + ':8000/searchlist' + location.search)
+    fetch('http://' + URI + ':' + PORT + '/searchlist' + location.search)
       .then(res => res.json())
       .then(json => {
         setResultCount(json.resultCount[0].result_cnt);
@@ -85,7 +86,7 @@ const SearchPage = () => {
 
   return (
     <Fragment>
-      <Header pathname={location.pathname} URI={URI} />
+      <Header pathname={location.pathname} URI={URI} PORT={PORT} />
       <div className="searchKeyWordBar">
         <div className="searchKeyWord">
           <div className="searchLogoImg" />
@@ -144,7 +145,7 @@ const SearchPage = () => {
           </div>
         </Fragment>
       ) : (
-        <CardList URI={URI} />
+        <CardList URI={URI} PORT={PORT} />
       )}
 
       <Footer />

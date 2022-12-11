@@ -6,11 +6,12 @@ import Artwork from '../../components/Artwork/Artwork';
 
 const Work = () => {
   const URI = process.env.REACT_APP_BASE_URL;
+  const PORT = process.env.REACT_APP_BACK_DEFAULT_PORT;
   return (
     <Fragment>
-      <Header URI={URI} />
-      <CategoryCarousel URI={URI} />
-      <Artwork URI={URI} />
+      <Header URI={URI} PORT={PORT} />
+      <CategoryCarousel URI={URI} PORT={PORT} />
+      <Artwork URI={URI} PORT={PORT} />
       <Footer />
     </Fragment>
   );

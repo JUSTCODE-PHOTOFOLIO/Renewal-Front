@@ -5,10 +5,11 @@ import AccountInfo from '../../components/AccountInfo/AccountInfo';
 
 const AccountInfoPage = () => {
   const URI = process.env.REACT_APP_BASE_URL;
+  const PORT = process.env.REACT_APP_BACK_DEFAULT_PORT;
   return (
     <Fragment>
-      <Header URI={URI} />
-      <AccountInfo URI={URI} />
+      <Header URI={URI} PORT={PORT} />
+      <AccountInfo URI={URI} PORT={PORT} />
       <Footer />
     </Fragment>
   );

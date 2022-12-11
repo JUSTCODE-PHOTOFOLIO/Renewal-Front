@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import css from './Follow.module.scss';
 import { useParams } from 'react-router-dom';
 
-const Follow = ({ type, writerInfo, URI }) => {
+const Follow = ({ type, writerInfo, URI, PORT }) => {
   const [isFollow, setIsFollow] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -32,7 +32,7 @@ const Follow = ({ type, writerInfo, URI }) => {
   useEffect(() => {
     if (token) {
       //팔로우 버튼 데이터 가져오기
-      fetch('http://' + URI + ':8000/follow/check/', {
+      fetch('http://' + URI + ':' + PORT + '/follow/check/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ const Follow = ({ type, writerInfo, URI }) => {
   const sendResult = e => {
     if (e.target.className.includes('FollowingBtn')) {
       //DELETE 작가id, 토큰
-      fetch('http://' + URI + ':8000/follow', {
+      fetch('http://' + URI + ':' + PORT + '/follow', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ const Follow = ({ type, writerInfo, URI }) => {
         });
     } else if (e.target.className.includes('FollowBtn')) {
       //POST 작가id, 토큰
-      fetch('http://' + URI + ':8000/follow', {
+      fetch('http://' + URI + ':' + PORT + '/follow', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

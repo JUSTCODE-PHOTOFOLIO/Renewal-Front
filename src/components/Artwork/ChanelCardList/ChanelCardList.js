@@ -3,13 +3,13 @@ import { useParams } from 'react-router-dom';
 import Card from './ChanelCard';
 import './chanelCardList.scss';
 
-function CardList({ filter, URI }) {
+function CardList({ filter, URI, PORT }) {
   const [data, setData] = useState([]);
   let param = useParams();
   let params = param.user_id;
 
   useEffect(() => {
-    fetch('http://' + URI + ':8000/channel/' + params)
+    fetch('http://' + URI + ':' + PORT + '/channel/' + params)
       .then(res => res.json())
       .then(data => {
         setData(data.usersPosts);

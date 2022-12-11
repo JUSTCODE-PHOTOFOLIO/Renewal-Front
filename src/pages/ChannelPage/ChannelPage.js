@@ -4,10 +4,11 @@ import Channel from '../../components/Channel/Channel';
 
 const ChannelPage = () => {
   const URI = process.env.REACT_APP_BASE_URL;
+  const PORT = process.env.REACT_APP_BACK_DEFAULT_PORT;
   return (
     <Fragment>
-      <Header URI={URI} />
-      <Channel URI={URI} />
+      <Header URI={URI} PORT={PORT} />
+      <Channel URI={URI} PORT={PORT} />
     </Fragment>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './join.scss';
 
-function Join({ setJoinPage, URI }) {
+function Join({ setJoinPage, URI, PORT }) {
   const [userData, setUserData] = useState();
   const [files, setFiles] = useState();
 
@@ -58,7 +58,7 @@ function Join({ setJoinPage, URI }) {
       userEmail.current.value &&
       files[0]
     ) {
-      fetch('http://' + URI + ':8000/user/signup', {
+      fetch('http://' + URI + ':' + PORT + '/user/signup', {
         method: 'POST',
         headers: {
           // 'Content-Type': 'multipart/form-data', // 헤더 없으면 에러남

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './login.scss';
 
-function Login({ closeLoginpage, setJoinPage, setOpenLoginPage, URI }) {
+function Login({ closeLoginpage, setJoinPage, setOpenLoginPage, URI, PORT }) {
   const [resObj, setResObj] = useState({});
 
   const id = useRef();
@@ -23,7 +23,7 @@ function Login({ closeLoginpage, setJoinPage, setOpenLoginPage, URI }) {
 
   useEffect(() => {
     if (resObj.login_id) {
-      fetch('http://' + URI + ':8000/user/login', {
+      fetch('http://' + URI + ':' + PORT + '/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json', // 헤더 없으면 에러남

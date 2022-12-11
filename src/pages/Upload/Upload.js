@@ -16,6 +16,7 @@ function App() {
 
   const [cardData, setCardData] = useState(null);
   const URI = process.env.REACT_APP_BASE_URL;
+  const PORT = process.env.REACT_APP_BACK_DEFAULT_PORT;
 
   const [previewImg, setPreviewImg] = useState(null);
 
@@ -50,7 +51,7 @@ function App() {
 
   useEffect(() => {
     if (cardData !== null) {
-      fetch('http://' + URI + ':8000/upload/form', {
+      fetch('http://' + URI + ':' + PORT + '/upload/form', {
         method: 'POST',
         headers: {
           Authorization: localStorage.getItem('token'),
@@ -69,7 +70,7 @@ function App() {
 
   return (
     <>
-      <Header URI={URI} />
+      <Header URI={URI} PORT={PORT} />
       {uploadCheck && <UploadMain onImgChange={onImgChange} />}
       {!uploadCheck && (
         <UploadWrite

@@ -12,6 +12,7 @@ function App() {
   const params = useParams();
   const navigate = useNavigate();
   const URI = process.env.REACT_APP_BASE_URL;
+  const PORT = process.env.REACT_APP_BACK_DEFAULT_PORT;
 
   const categoryList = [
     '패션',
@@ -86,7 +87,7 @@ function App() {
           })}
         </div>
       )}
-      <CardList URI={URI} />
+      <CardList URI={URI} PORT={PORT} />
       <Footer />
     </>
   );
