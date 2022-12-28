@@ -3,11 +3,12 @@ import Header from '../../components/Header/Header';
 import CardList from '../../components/Artwork/CardList';
 import Footer from '../../components/Footer/Footer';
 const Feed = () => {
-  const URI = process.env.REACT_APP_BASE_URL;
+  const BACK_URI = process.env.REACT_APP_BASE_BACK_URL;
+  const PORT = process.env.REACT_APP_BACK_DEFAULT_PORT;
   return (
     <Fragment>
-      <Header URI={URI} />
-      <CardList URI={URI} />
+      <Header BACK_URI={BACK_URI} PORT={PORT} />
+      <CardList BACK_URI={BACK_URI} PORT={PORT} />
       <Footer />
     </Fragment>
   );

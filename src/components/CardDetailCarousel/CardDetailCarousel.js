@@ -5,7 +5,7 @@ import './CardDetailCarousel.scss';
 
 import Follow from '../Follow/Follow';
 
-const CardDetailCarousel = ({ URI, info, works, writerInfo }) => {
+const CardDetailCarousel = ({ BACK_URI, info, works, writerInfo, PORT }) => {
   //캐러셀 내부 ul 위치 파악
   //1이면 맨 처음(index같은 느낌)
   const [carouselIndex, setCarouselIndex] = useState(0);
@@ -80,7 +80,12 @@ const CardDetailCarousel = ({ URI, info, works, writerInfo }) => {
               </div>
             </div>
           </div>
-          <Follow writerInfo={writerInfo} URI={URI} type={'short'} />
+          <Follow
+            writerInfo={writerInfo}
+            BACK_URI={BACK_URI}
+            type={'short'}
+            PORT={PORT}
+          />
         </div>
         {/* Carousel */}
         {works === null ? (
