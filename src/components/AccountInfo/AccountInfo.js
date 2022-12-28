@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './AccountInfo.scss';
 import DeleteModal from './DeleteModal/DeleteModal';
 
-const AccountInfo = ({ URI }) => {
+const AccountInfo = ({ BACK_URI, PORT }) => {
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const [accountInfo, setAccountInfo] = useState({
@@ -26,7 +26,7 @@ const AccountInfo = ({ URI }) => {
 
   //계정정보 fetch
   useEffect(() => {
-    fetch('http://' + URI + ':8000/user/accountInfo', {
+    fetch('http://' + BACK_URI + ':' + PORT + '/user/accountInfo', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ const AccountInfo = ({ URI }) => {
   //수정된 계정정보 서버로 저장
   const saveAccountInfo = e => {
     e.preventDefault();
-    fetch('http://' + URI + ':8000/user/accountInfo', {
+    fetch('http://' + BACK_URI + ':' + PORT + '/user/accountInfo', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -189,7 +189,10 @@ const AccountInfo = ({ URI }) => {
                   채널삭제
                 </button>
                 {modalOpen && (
-                  <DeleteModal setModalOpen={setModalOpen} URI={URI} />
+                  <DeleteModal
+                    setModalOpen={setModalOpen}
+                    BACK_URI={BACK_URI}
+                  />
                 )}
               </div>
             </div>

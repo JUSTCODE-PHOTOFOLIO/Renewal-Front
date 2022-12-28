@@ -3,7 +3,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import Card from './Card';
 import './cardList.scss';
 
-function CardList({ filter, URI, testState }) {
+function CardList({ filter, BACK_URI, testState, PORT }) {
   const [data, setData] = useState([]);
 
   let param = useParams();
@@ -12,14 +12,14 @@ function CardList({ filter, URI, testState }) {
 
   useEffect(() => {
     if (location.pathname === '/works' && location.search === '') {
-      fetch('http://' + URI + ':8000/works')
+      fetch('http://' + BACK_URI + ':' + PORT + '/works')
         .then(res => res.json())
         .then(data => {
           setData(data.worksFeedList);
         });
       return;
     } else if (location.search === '?sort=recommendpoint') {
-      fetch('http://' + URI + ':8000/works?sort=recommendpoint', {
+      fetch('http://' + BACK_URI + ':' + PORT + '/works?sort=recommendpoint', {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -30,7 +30,7 @@ function CardList({ filter, URI, testState }) {
         });
       return;
     } else if (location.search === '?sort=sympathycnt') {
-      fetch('http://' + URI + ':8000/works?sort=sympathycnt', {
+      fetch('http://' + BACK_URI + ':' + PORT + '/works?sort=sympathycnt', {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -41,7 +41,7 @@ function CardList({ filter, URI, testState }) {
         });
       return;
     } else if (location.pathname === '/feeds') {
-      fetch('http://' + URI + ':8000/feeds/list', {
+      fetch('http://' + BACK_URI + ':' + PORT + '/feeds/list', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: localStorage.getItem('token'),
@@ -55,35 +55,35 @@ function CardList({ filter, URI, testState }) {
     } else if (location.pathname === '/searchlist') {
       // let params = new URLSearchParams(location.search);
       let params = window.location.search;
-      fetch('http://' + URI + ':8000/searchlist' + params)
+      fetch('http://' + BACK_URI + ':' + PORT + '/searchlist' + params)
         .then(res => res.json())
         .then(data => {
           setData(data.searchResult);
         });
       return;
     } else if (location.pathname === '/category/fashion') {
-      fetch('http://' + URI + ':8000/category/fashion')
+      fetch('http://' + BACK_URI + ':' + PORT + '/category/fashion')
         .then(res => res.json())
         .then(data => {
           setData(data);
         });
       return;
     } else if (location.pathname === '/category/travel') {
-      fetch('http://' + URI + ':8000/category/travel')
+      fetch('http://' + BACK_URI + ':' + PORT + '/category/travel')
         .then(res => res.json())
         .then(data => {
           setData(data);
         });
       return;
     } else if (location.pathname === '/category/pattern') {
-      fetch('http://' + URI + ':8000/category/pattern')
+      fetch('http://' + BACK_URI + ':' + PORT + '/category/pattern')
         .then(res => res.json())
         .then(data => {
           setData(data);
         });
       return;
     } else if (location.pathname === '/category/animal') {
-      fetch('http://' + URI + ':8000/category/animal')
+      fetch('http://' + BACK_URI + ':' + PORT + '/category/animal')
         .then(res => res.json())
         .then(data => {
           setData(data);
@@ -92,7 +92,7 @@ function CardList({ filter, URI, testState }) {
     } else if (location.pathname === '/category/searchlist') {
       // let params = new URLSearchParams(location.search);
       let params = window.location.search;
-      fetch('http://' + URI + ':8000/works/' + params)
+      fetch('http://' + BACK_URI + ':' + PORT + '/works/' + params)
         .then(res => res.json())
         .then(data => {
           setData(data.searchResult);
@@ -101,7 +101,7 @@ function CardList({ filter, URI, testState }) {
     } else if (location.pathname === '/category/searchlist') {
       // let params = new URLSearchParams(location.search);
       let params = window.location.search;
-      fetch('http://' + URI + ':8000/works/' + params)
+      fetch('http://' + BACK_URI + ':' + PORT + '/works/' + params)
         .then(res => res.json())
         .then(data => {
           setData(data.searchResult);

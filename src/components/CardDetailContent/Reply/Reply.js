@@ -8,8 +8,9 @@ const Reply = ({
   created_at,
   user_id,
   id,
-  URI,
+  BACK_URI,
   posting_id,
+  PORT,
 }) => {
   const idCheck = localStorage.getItem('id');
   const [menuBtn, setMenuBtn] = useState(false); //메뉴버튼 클릭 상태
@@ -28,7 +29,7 @@ const Reply = ({
   //댓글 삭제 fetch
   const deleteReply = () => {
     alert('댓글을 삭제하시겠습니까?');
-    fetch('http://' + URI + ':8000/comments', {
+    fetch('http://' + BACK_URI + ':' + PORT + '/comments', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
